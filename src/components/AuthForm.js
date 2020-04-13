@@ -7,6 +7,8 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [handle, setHandle] = useState('')
 
     return (
         <>
@@ -35,18 +37,65 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                 />
             </Spacer>
 
+            {
+                headerText === 'Sign Up' ? (
+                    <>
+                        <Spacer>
+                            <Input
+                                secureTextEntry
+                                label='Confirm Password'
+                                value={confirmPassword}
+                                onChangeText={newText => setConfirmPassword(newText)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                            />
+                        </Spacer>
 
-            {errorMessage ? (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-            ) : null}
+                        <Spacer>
+                            <Input
+                                label='Name'
+                                value={handle}
+                                onChangeText={newText => setHandle(newText)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                            />
+                        </Spacer>
+                    </>
 
-            <Spacer>
-                <Button
-                    buttonStyle={{backgroundColor: '#273746'}}
-                    title={submitButtonText}
-                    onPress={() => onSubmit({ email, password })}
-                />
-            </Spacer>
+                ) : null
+            }
+
+
+            { 
+                errorMessage ? (
+                    <Text style={styles.errorMessage}>{errorMessage}</Text>
+                ) : null
+            }
+
+
+            {
+                headerText === 'Sign Up' ? (
+
+                    <Spacer>
+                        <Button
+                            buttonStyle={{ backgroundColor: '#273746' }}
+                            title={submitButtonText}
+                            onPress={() => onSubmit({ email, password, confirmPassword, handle })}
+                        />
+                    </Spacer>
+
+
+                ) : (
+                        <Spacer>
+                            <Button
+                                buttonStyle={{ backgroundColor: '#273746' }}
+                                title={submitButtonText}
+                                onPress={() => onSubmit({ email, password })}
+                            />
+                        </Spacer>
+                    )
+            }
+
 
         </>
     )

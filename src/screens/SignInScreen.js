@@ -1,24 +1,26 @@
 import React, { useContext } from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-elements';
-import Spacer from '../components/Spacer'
 import AuthForm from '../components/AuthForm'
+import { AuthContext } from '../context/AuthContext'
 
-const SignInScreen = ({ navigation }) => {
+const SignInScreen = ({ navigation , errorMessage }) => {
+    
+    const { signIn } = useContext(AuthContext)
 
     return (
         <View style={styles.container}>
 
             <AuthForm
                 headerText='Sign In'
-                // errorMessage={state.errorMessage}
+                errorMessage={errorMessage}
                 submitButtonText='Sign In'
-            // onSubmit={signIn}
+                onSubmit={signIn}
             />
 
 
             <View style={styles.footer}>
-                <Text style={styles.footerText} > Don't have an account?  </Text>
+                <Text style={styles.footerText} > Don't have an account? </Text>
                 <TouchableOpacity onPress={() => navigation.navigate('SignUp')} >
                     <Text style={styles.footerNav}> Sign Up </Text>
                 </TouchableOpacity>
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        marginBottom: 250
+        marginBottom: 200
     },
     footer: {
         flexDirection: 'row', 
