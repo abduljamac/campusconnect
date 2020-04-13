@@ -52,7 +52,7 @@ export default AppNavigator = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
-            // setUserToken("fakeToken")
+            setUserToken("fakeToken")
         }, 100)
     }, [])
 
