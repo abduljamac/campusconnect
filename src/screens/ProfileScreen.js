@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Text } from 'react-native-elements';
-import {  AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
 
-    const { state, signOut } = useContext(AuthContext)
+    const { signOut } = useContext(AuthContext)
 
     return (
         <View>
@@ -16,6 +16,7 @@ const ProfileScreen = () => {
                 title='Sign Out'
                 onPress={() => signOut()}
             />
+
 
         </View>
     )
