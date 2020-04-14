@@ -4,14 +4,14 @@ import { Text, Input, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { AuthContext } from '../context/AuthContext'
 
-const CreateProfileScreen = ( ) => {
+const EditProfileScreen = ( ) => {
 
     const [uni, setUni] = useState('')
     const [bio, setBio] = useState('')
     const [category, setCategory] = useState('')
     const [price, setPrice] = useState('')
 
-    const { createProfile } = useContext(AuthContext)
+    const { editProfile } = useContext(AuthContext)
 
     return (
         <View style={styles.container}>
@@ -63,7 +63,7 @@ const CreateProfileScreen = ( ) => {
                 <Button
                     buttonStyle={{ backgroundColor: '#273746' }}
                     title="Submit Details"
-                    onPress={() => createProfile({ uni, bio, category, price })}
+                    onPress={() => editProfile({ uni, bio, category, price })}
                 />
             </Spacer>
 
@@ -74,7 +74,8 @@ const CreateProfileScreen = ( ) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 200
     },
     footer: {
         flexDirection: 'row',
@@ -93,4 +94,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CreateProfileScreen
+export default EditProfileScreen

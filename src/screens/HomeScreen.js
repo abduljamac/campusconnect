@@ -15,6 +15,8 @@ const HomeScreen = ({ navigation }) => {
         return freelancers
     }, [navigation])
 
+    // console.log(state)
+
     return (
         <View style={{ alignContent: 'center', marginTop: 10 }}>
 
