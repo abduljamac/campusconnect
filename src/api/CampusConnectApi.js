@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'
 
 const instance = axios.create({
     baseURL: 'https://europe-west1-campusconnect-backend.cloudfunctions.net/api'

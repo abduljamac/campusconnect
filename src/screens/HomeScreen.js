@@ -1,31 +1,61 @@
-import React, { useContext } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-// import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import { NavigationEvents } from '@react-navigation/native';
+import React, { useContext, useEffect } from 'react'
+import { StyleSheet, View, FlatList } from 'react-native'
+import { Card, ListItem, Button, Icon, Text, Avatar } from 'react-native-elements'
 import { Context as Feed } from '../context/Feed'
 
 
 const HomeScreen = ({ navigation }) => {
 
-    const { state, fetchFreelancers } = useContext(Feed);
+    const { state, fetchFreelancers } = useContext(Feed)
 
-    React.useEffect(() => {
+    useEffect(() => {
         const freelancers = navigation.addListener('focus', () => {
-          // do something
-          fetchFreelancers() 
+            fetchFreelancers()
         })
-        return freelancers;
-      }, [navigation]);
-    
-    console.log(state)
+        return freelancers
+    }, [navigation])
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text> Hello welcome to Home Page </Text>
+        <View style={{ alignContent: 'center', marginTop: 10 }}>
+
+            <FlatList
+                data={state}
+                keyExtractor={item => item.userId}
+                renderItem={({ item }) => {
+                    return (
+
+                        <ListItem
+                            key={item.userHandle}
+                            leftAvatar={{ source: { uri: item.profileImage } }}
+                            title={item.userHandle}
+                            rightTitle={item.price}
+                            subtitle={item.bio}
+                            titleStyle={styles.title}
+                            subtitleStyle={styles.subtitle}
+                        />
+
+                    )
+                }}
+            />
+
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "black"
+    },
+    subtitle: {
+        fontSize: 12,
+        color: "black"
+    }
+
+})
 
 export default HomeScreen

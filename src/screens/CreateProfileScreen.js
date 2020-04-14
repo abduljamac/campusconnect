@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements';
+import { Text, Input, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { AuthContext } from '../context/AuthContext'
 
-const CreateProfileScreen = ( { successMessage } ) => {
+const CreateProfileScreen = ( ) => {
 
     const [uni, setUni] = useState('')
     const [bio, setBio] = useState('')
@@ -13,7 +13,6 @@ const CreateProfileScreen = ( { successMessage } ) => {
 
     const { createProfile } = useContext(AuthContext)
 
-    console.log(successMessage);
     return (
         <View style={styles.container}>
             <Spacer>

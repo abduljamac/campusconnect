@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-elements';
+import { Text } from 'react-native-elements'
 import AuthForm from '../components/AuthForm'
 import { AuthContext } from '../context/AuthContext'
 
