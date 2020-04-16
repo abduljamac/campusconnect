@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: "#273746",
         fontWeight: "400",
-        fontFamily: "Helvetica Neue"
+        // fontFamily: "Helvetica Neue"
     },
     errorMessage: {
         fontSize: 16,

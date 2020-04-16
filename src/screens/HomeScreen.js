@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
 import { Card, ListItem, Button, Icon, Text, Avatar } from 'react-native-elements'
 import { Context as Feed } from '../context/Feed'
-
+import Loading from '../components/Loading'
 
 const HomeScreen = ({ navigation }) => {
 
@@ -15,30 +15,31 @@ const HomeScreen = ({ navigation }) => {
         return freelancers
     }, [navigation])
 
-    // console.log(state)
 
     return (
         <View style={{ alignContent: 'center', marginTop: 10 }}>
 
-            <FlatList
-                data={state}
-                keyExtractor={item => item.userId}
-                renderItem={({ item }) => {
-                    return (
+            {state !== undefined ?
+                <FlatList
+                    data={state}
+                    keyExtractor={item => item.userId}
+                    renderItem={({ item }) => {
+                        return (
 
-                        <ListItem
-                            key={item.userHandle}
-                            leftAvatar={{ source: { uri: item.profileImage } }}
-                            title={item.userHandle}
-                            rightTitle={item.price}
-                            subtitle={item.bio}
-                            titleStyle={styles.title}
-                            subtitleStyle={styles.subtitle}
-                        />
+                            <ListItem
+                                key={item.userHandle}
+                                leftAvatar={{ source: { uri: item.profileImage } }}
+                                title={item.handle}
+                                rightTitle={item.price}
+                                subtitle={item.bio}
+                                titleStyle={styles.title}
+                                subtitleStyle={styles.subtitle}
+                            />
 
-                    )
-                }}
-            />
+                        )
+                    }}
+                />
+                : <Loading /> }
 
         </View>
     )

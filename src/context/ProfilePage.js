@@ -1,21 +1,26 @@
 import createDataContext from './ContextCreator'
-import { AsyncStorage } from 'react-native'
-import CampusConnect from '../api/CampusConnectApi'
+import CampusConnectApi from '../api/CampusConnectApi'
 
-
-const authReducer = (state, action) => {
+const userDetailReducer = (state, action) => {
 
     switch (action.type) {
+        case 'GET_USER_DETAILS':
+            return action.payload
+        case 'ADD_ERROR':
+            return { errorMessage: action.payload }
         default:
             return state
     }
 }
 
-const fetchUserDAetails = dispatch => async () => {
+const fetchUserDetails = dispatch => async () => {
+    const response = await CampusConnectApi.get('/user')
+    dispatch({ type: 'GET_USER_DETAILS', payload: response.data })
 }
 
 export const { Provider, Context } = createDataContext(
-    authReducer,
-    {  },
-    {  }
+    userDetailReducer,
+    { fetchUserDetails },
+    { }
+    // { errorMessage: '' }
 )

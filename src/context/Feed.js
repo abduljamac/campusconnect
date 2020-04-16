@@ -1,5 +1,5 @@
 import createDataContext from './ContextCreator'
-import CampusConnect from '../api/CampusConnectApi'
+import CampusConnectApi from '../api/CampusConnectApi'
 
 
 const feedReducer = (state, action) => {
@@ -13,7 +13,7 @@ const feedReducer = (state, action) => {
 }
 
 const fetchFreelancers = dispatch => async () => {
-    const response = await CampusConnect.get('/freelancers')
+    const response = await CampusConnectApi.get('/freelancers')
     dispatch({ type: 'FETCH_FREELANCERS', payload: response.data })
 }
 
