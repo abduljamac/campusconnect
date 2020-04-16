@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-elements'
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native'
+import { Content } from 'native-base'
 import AuthForm from '../components/AuthForm'
 import { AuthContext } from '../context/AuthContext'
 
@@ -11,19 +11,23 @@ const SignUpScreen = ({ navigation, errorMessage }) => {
     return (
         <View style={styles.container}>
 
-            <AuthForm
-                headerText='Sign Up'
-                errorMessage={errorMessage}
-                submitButtonText='Sign Up'
-                onSubmit={signUp}
-            />
+            <Image source={require("../../assets/authHeader.png")} style={{ marginTop: -176, marginLeft: -50, backgroundColor: 'white' }} />
+            <Image source={require("../../assets/authFooter.png")} style={{ position: "absolute", bottom: -325, right: -225 }} />
 
-            <View style={styles.footer}>
-                <Text style={styles.footerText} > Already have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignIn')} >
-                    <Text style={styles.footerNav}> Sign In </Text>
-                </TouchableOpacity>
-            </View>
+            <Content>
+                <AuthForm
+                    headerText='Sign Up'
+                    errorMessage={errorMessage}
+                    submitButtonText='Sign Up'
+                    onSubmit={signUp}
+                />
+                <View style={styles.footer}>
+                    <Text style={styles.footerText} > Already have an account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('SignIn')} >
+                        <Text style={styles.footerNav}> Sign In </Text>
+                    </TouchableOpacity>
+                </View>
+            </Content>
 
         </View>
     )
@@ -32,8 +36,7 @@ const SignUpScreen = ({ navigation, errorMessage }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        marginBottom: 200
+        backgroundColor: 'white'
     },
     footer: {
         flexDirection: 'row',

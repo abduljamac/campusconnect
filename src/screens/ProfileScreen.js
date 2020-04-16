@@ -1,27 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View, ScrollView, Dimensions } from 'react-native'
-import { Text, Image, Button, Avatar } from 'react-native-elements'
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
+import { Button } from 'react-native-elements'
 import { AuthContext } from '../context/AuthContext'
 import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
-import { TabView, SceneMap } from 'react-native-tab-view'
 
-
-const FirstRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-)
-
-const SecondRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-)
-
-const initialLayout = { width: Dimensions.get('window').width }
 
 const ProfileScreen = ({ navigation }) => {
 
     const { signOut } = useContext(AuthContext)
     const { state, fetchUserDetails } = useContext(ProfilePage)
-    const [index, setIndex] = React.useState(0)
 
     useEffect(() => {
         const userDetails = navigation.addListener('focus', () => {
@@ -30,69 +18,54 @@ const ProfileScreen = ({ navigation }) => {
         return userDetails
     }, [navigation])
 
-    const [routes] = React.useState([
-        { key: 'first', title: 'First' },
-        { key: 'second', title: 'Second' },
-    ])
-
-    const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-    })
+    console.log(state.user);
 
     return (
         <ScrollView style={styles.scroll}>
 
-            {state.user !== undefined ?
-                <>
-                    <View style={styles.cardContainer}>
-                        <View style={styles.headerContainer}>
-                            <View style={styles.userRow}>
-                                <View>
-                                    <Avatar
-                                        rounded
-                                        size="large"
-                                        source={{ uri: state.user.imageUrl }}
-                                    // renderPlaceholderContent={require('../../assets/no-img.jpg')}
-                                    />
-                                </View>
-                                <View style={styles.userNameRow}>
-                                    <Text style={styles.userNameText}>{state.user.handle}</Text>
-                                </View>
-                                <View style={styles.userBioRow}>
-                                    <Text style={styles.userBioText}>{state.user.bio}</Text>
-                                </View>
+            {
 
-                                <View style={styles.buttons}>
-                                    <Button
-                                        title='Sign Out'
-                                        buttonStyle={{ borderColor: '#273746', marginRight: 5 }}
-                                        type="outline"
-                                        titleStyle={{ color: '#273746' }}
-                                        onPress={() => signOut()}
-                                    />
-                                    <Button
-                                        title="Edit Profile"
-                                        buttonStyle={{ borderColor: '#273746' }}
-                                        type="outline"
-                                        titleStyle={{ color: '#273746' }}
-                                        onPress={() => navigation.navigate('EditProfileScreen')}
-                                    />
-                                </View>
+                state.user ?
+
+                    <View style={styles.container}>
+
+                        <View style={{ marginTop: 20, alignItems: "center" }}>
+                            <View>
+                                <Image
+                                    source={{ uri: state.user.imageUrl }}
+                                    style={styles.avatar}
+                                />
                             </View>
-                        </View>
-                    </View>
+                            <Text style={styles.userNameText}>Abdul</Text>
+                            <View style={styles.userBioRow}>
+                                <Text style={styles.userBioText}>Hello my name is Abdul I'm computer science tutor</Text>
+                            </View>
 
-                    <View>
-                        <TabView
-                            navigationState={{ index, routes }}
-                            renderScene={renderScene}
-                            onIndexChange={setIndex}
-                            initialLayout={initialLayout}
-                        />
-                    </View>
-                </>
-                : <Loading />}
+                        </View>
+
+                        <View style={styles.buttons}>
+
+                            <Button
+                                title='Sign Out'
+                                buttonStyle={{ borderColor: '#E74C3C', marginRight: 5 }}
+                                type="outline"
+                                titleStyle={{ color: '#273746' }}
+                                onPress={() => signOut()}
+                            />
+                            
+                            <Button
+                                title="Edit Profile"
+                                buttonStyle={{ borderColor: '#E74C3C' }}
+                                type="outline"
+                                titleStyle={{ color: '#273746' }}
+                                onPress={() => navigation.navigate('EditProfileScreen')}
+                            />
+
+                        </View>
+
+                    </View> : <Loading />
+            }
+
 
         </ScrollView>
     )
@@ -102,48 +75,41 @@ const styles = StyleSheet.create({
     scroll: {
         backgroundColor: '#FFF',
     },
-    cardContainer: {
-        flex: 1,
+    container: {
+        flex: 1
     },
-    headerContainer: {
-        alignItems: 'center',
-        backgroundColor: '#FFF',
-        marginBottom: 10,
-        marginTop: 20,
+    profile: {
+        // marginTop: 30,
+        alignItems: "center"
     },
-    userBioRow: {
-        marginLeft: 40,
-        marginRight: 40,
-    },
-    userBioText: {
-        color: 'gray',
-        fontSize: 13.5,
-        textAlign: 'center',
-    },
-    userNameRow: {
-        marginBottom: 10,
+    avatar: {
+        width: 136,
+        height: 136,
+        borderRadius: 68
     },
     userNameText: {
         color: '#5B5A5A',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
+        marginTop: 5
     },
-    userRow: {
-        alignItems: 'center',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        marginBottom: 12,
+    userBioRow: {
+        marginTop: 5,
+        marginLeft: 40,
+        marginRight: 40,
+    },
+    userBioText: {
+        color: 'gray',
+        fontSize: 16,
+        textAlign: 'center'
     },
     buttons: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 5
+        marginTop: 10
     },
-    scene: {
-        flex: 1,
-    }
 
 })
 

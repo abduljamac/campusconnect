@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements'
+import { Text, Label, Form, Item, Input, Button } from 'native-base'
 import Spacer from './Spacer'
 
 const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
@@ -12,89 +12,86 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
     return (
         <>
-            <Spacer>
-                <Text h3 style={styles.header}>{headerText}</Text>
-            </Spacer>
+            <Form>
+                <Spacer>
+                    <Text style={styles.header}>{headerText}</Text>
+                </Spacer>
 
-            <Spacer>
-                <Input
-                    label='Email'
-                    value={email}
-                    onChangeText={newText => setEmail(newText)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-            </Spacer>
-
-            <Spacer>
-                <Input
-                    secureTextEntry
-                    label='Password'
-                    value={password}
-                    onChangeText={newText => setPassword(newText)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-            </Spacer>
-
-            {
-                headerText === 'Sign Up' ? (
-                    <>
-                        <Spacer>
-                            <Input
-                                secureTextEntry
-                                label='Confirm Password'
-                                value={confirmPassword}
-                                onChangeText={newText => setConfirmPassword(newText)}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        </Spacer>
-
-                        <Spacer>
-                            <Input
-                                label='Name'
-                                value={handle}
-                                onChangeText={newText => setHandle(newText)}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        </Spacer>
-                    </>
-
-                ) : null
-            }
-
-
-            { 
-                errorMessage ? (
-                    <Text style={styles.errorMessage}>{errorMessage}</Text>
-                ) : null
-            }
-
-
-            {
-                headerText === 'Sign Up' ? (
-
-                    <Spacer>
-                        <Button
-                            buttonStyle={{ backgroundColor: '#273746' }}
-                            title={submitButtonText}
-                            onPress={() => onSubmit({ email, password, confirmPassword, handle })}
+                <Spacer>
+                    <Item inlineLabel>
+                        <Label>Email</Label>
+                        <Input
+                            value={email}
+                            onChangeText={newText => setEmail(newText)}
+                            autoCapitalize="none"
+                            autoCorrect={false}
                         />
-                    </Spacer>
+                    </Item>
+                </Spacer>
 
+                <Spacer>
+                    <Item inlineLabel>
+                        <Label>Password</Label>
+                        <Input
+                            secureTextEntry
+                            value={password}
+                            onChangeText={newText => setPassword(newText)}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                        />
+                    </Item>
+                </Spacer>
 
+                {
+                    headerText === 'Sign Up' ? (
+                        <>
+                            <Spacer>
+                                <Item inlineLabel>
+                                    <Label>Confirm Password</Label>
+                                    <Input
+                                        secureTextEntry
+                                        value={confirmPassword}
+                                        onChangeText={newText => setConfirmPassword(newText)}
+                                        autoCapitalize="none"
+                                        autoCorrect={false}
+                                    />
+                                </Item>
+                            </Spacer>
+
+                            <Spacer>
+                                <Item inlineLabel>
+                                    <Label>Name</Label>
+                                    <Input
+                                        value={handle}
+                                        onChangeText={newText => setHandle(newText)}
+                                        autoCapitalize="none"
+                                        autoCorrect={false}
+                                    />
+                                </Item>
+                            </Spacer>
+                        </>
+
+                    ) : null
+                }
+      
+            </Form>
+
+            {
+                headerText === 'Sign Up' ? (
+
+                    <Button block style={{ margin: 15, marginTop: 20, backgroundColor: '#17202A' }} onPress={() => onSubmit({ email, password, confirmPassword, handle })}>
+                        <Text>Sign Up</Text>
+                    </Button>
                 ) : (
-                        <Spacer>
-                            <Button
-                                buttonStyle={{ backgroundColor: '#273746' }}
-                                title={submitButtonText}
-                                onPress={() => onSubmit({ email, password })}
-                            />
-                        </Spacer>
+                        <Button block style={{ margin: 15, marginTop: 20, backgroundColor: '#17202A' }} onPress={() => onSubmit({ email, password })}>
+                            <Text>Sign In</Text>
+                        </Button>
                     )
+
             }
+
+
+
 
 
         </>
@@ -103,9 +100,7 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        marginBottom: 250
+        marginTop: 50
     },
     header: {
         height: 50,
@@ -113,19 +108,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         fontSize: 25,
         color: "#273746",
-        fontWeight: "400",
+        fontWeight: "600",
         // fontFamily: "Helvetica Neue"
-    },
-    errorMessage: {
-        fontSize: 16,
-        color: 'red',
-        marginLeft: 15,
-        marginTop: 15,
-        textAlign: 'center'
-    },
-    link: {
-        color: 'blue',
-        textAlign: 'center'
     }
 })
 

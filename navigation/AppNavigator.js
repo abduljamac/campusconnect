@@ -4,6 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { AsyncStorage } from 'react-native'
+import * as Font from 'expo-font'
+import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 
 import CampusConnectApi from '../src/api/CampusConnectApi'
 import Loading from '../src/components/Loading'
@@ -35,36 +38,36 @@ const AuthStackScreen = () => (
 
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={Home} />
+        <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </HomeStack.Navigator>
 )
 
 const ProfileStackSreen = () => (
     <ProfileStack.Navigator>
-        <ProfileStack.Screen name="Profile" component={Profile} />
-        <ProfileStack.Screen name="Edit Profile" component={EditProfileScreen} />
+        <ProfileStack.Screen name="Profile" component={Profile} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <ProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#17202A' }, headerTintColor: '#fff' }} />
     </ProfileStack.Navigator>
 )
 
 const EditProfileStackScreen = () => (
     <EditProfileStack.Navigator>
-        <EditProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ title: 'Edit Profile' }} />
+        <EditProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </EditProfileStack.Navigator>
 )
 
 
 const MessagesStackScreen = () => (
     <MessagesStack.Navigator>
-        <MessagesStack.Screen name="Messages" component={MessagesScreen} options={{ title: 'Messages' }} />
+        <MessagesStack.Screen name="Messages" component={MessagesScreen} options={{ title: 'Messages', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </MessagesStack.Navigator>
 )
 
 
 const TabsScreen = () => (
     <Tabs.Navigator initialRouteName={"Home"}>
-        <Tabs.Screen name="Home" component={HomeStackSreen} />
-        <Tabs.Screen name="Profile" component={ProfileStackSreen} />
-        <Tabs.Screen name="Messages" component={MessagesStackScreen} />
+        <Tabs.Screen name="Home" component={HomeStackSreen} options={{ tabBarIcon: () => (<AntDesign name="home" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
+        <Tabs.Screen name="Profile" component={ProfileStackSreen} options={{ tabBarIcon: () => (<AntDesign name="profile" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
+        <Tabs.Screen name="Messages" component={MessagesStackScreen} options={{ tabBarIcon: () => (<AntDesign name="message1" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
     </Tabs.Navigator>
 )
 
@@ -100,6 +103,15 @@ const AppNavigator = () => {
         { token: null, errorMessage: null, successMessage: null }
     )
 
+
+    useEffect(() => {
+        Font.loadAsync({
+            Roboto: require('native-base/Fonts/Roboto.ttf'),
+            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+            ...Ionicons.font,
+        })
+    }, [])
+
     useEffect(() => {
         const tryLocalSignin = async () => {
             const token = await AsyncStorage.getItem('token')
@@ -133,7 +145,7 @@ const AppNavigator = () => {
                     dispatch({ type: 'SIGN_IN', payload: response.data.token })
                 } catch (error) {
                     // console.log(error.message)
-                    setErrorMessage('Please Check Email & Password')
+                    // setErrorMessage('Please Check Email & Password')
                     dispatch({ type: 'ADD_ERROR', payload: error.message })
                 }
             },
@@ -154,6 +166,15 @@ const AppNavigator = () => {
         }),
         []
     )
+
+    useEffect(() => {
+        Font.loadAsync({
+            Roboto: require('native-base/Fonts/Roboto.ttf'),
+            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+            ...Ionicons.font,
+        })
+    }, [])
+
 
     useEffect(() => {
         setTimeout(() => {
