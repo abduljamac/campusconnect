@@ -66,7 +66,6 @@ const ProfileScreen = ({ navigation }) => {
                     </View> : <Loading />
             }
 
-
         </ScrollView>
     )
 }

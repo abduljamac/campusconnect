@@ -16,6 +16,7 @@ import Profile from '../src/screens/ProfileScreen'
 import Home from '../src/screens/HomeScreen'
 import EditProfileScreen from '../src/screens/EditProfileScreen'
 import MessagesScreen from '../src/screens/MessagesScreen'
+import FreelancerFeedScreen from '../src/screens/FreelancerFeedScreen'
 
 import { AuthContext } from '../src/context/AuthContext'
 import { Provider as ProfilePage } from '../src/context/ProfilePage'
@@ -39,6 +40,7 @@ const AuthStackScreen = () => (
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="FreelancerFeed" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </HomeStack.Navigator>
 )
 
