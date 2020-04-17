@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, TouchableHighlight, Image } from 'react-native'
+import {useNavigation} from '@react-navigation/native';
 
 // screen sizing
 const { width, height } = Dimensions.get('window');
@@ -12,22 +13,26 @@ const RECIPE_ITEM_HEIGHT = 150;
 const RECIPE_ITEM_MARGIN = 20;
 
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
 
-    const categories = [ { id: 1, category: 'Tutoring', img: require('../../assets/logo.png') },
-    { id: 2, category: 'Personal Care', img: require('../../assets/logo.png') },
-    { id: 3, category: 'Photography', img: require('../../assets/logo.png') },
-    { id: 4, category: 'Fitness', img: require('../../assets/logo.png') },
-    { id: 5, category: 'Web Dev', img: require('../../assets/logo.png') },
-    { id: 6, category: 'Design', img: require('../../assets/logo.png') },
+    const { navigate } = useNavigation();
+
+    const categories = [
+        { id: 1, category: 'Tutoring', img: require('../../assets/logo.png') },
+        { id: 2, category: 'Personal Care', img: require('../../assets/logo.png') },
+        { id: 3, category: 'Photography', img: require('../../assets/logo.png') },
+        { id: 4, category: 'Fitness', img: require('../../assets/logo.png') },
+        { id: 5, category: 'Web Dev', img: require('../../assets/logo.png') },
+        { id: 6, category: 'Design', img: require('../../assets/logo.png') },
     ]
 
     onPressCategory = item => {
-        navigation.navigate('FreelancerFeed', { item });
+        // navigation.navigate('FreelancerFeedScreen', { item })
+        navigate('FreelancerFeedScreen', { categories: item })
     }
 
     renderCategories = ({ item }) => (
-        <TouchableHighlight underlayColor='white'  onPress={() => this.onPressCategory(item.category)}>
+        <TouchableHighlight underlayColor='white' onPress={() => this.onPressCategory(item)}>
             <View style={styles.container}>
                 <Image style={styles.photo} source={item.img} />
                 <Text style={styles.title}>{item.category}</Text>
@@ -37,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={{ alignContent: 'center', marginTop: 10 }}>
-            
+
             <FlatList
                 vertical
                 showsVerticalScrollIndicator={false}

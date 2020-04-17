@@ -40,7 +40,7 @@ const AuthStackScreen = () => (
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
-        <HomeStack.Screen name="FreelancerFeed" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="FreelancerFeedScreen" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </HomeStack.Navigator>
 )
 
