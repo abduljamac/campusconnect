@@ -22,7 +22,7 @@ const ProfileScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.scroll}>
-
+                
             {
 
                 state.user ?
@@ -65,6 +65,14 @@ const ProfileScreen = ({ navigation }) => {
 
                     </View> : <Loading />
             }
+{/* 
+            <Button
+                title='Sign Out'
+                buttonStyle={{ borderColor: '#E74C3C', marginRight: 5 }}
+                type="outline"
+                titleStyle={{ color: '#273746' }}
+                onPress={() => signOut()}
+            /> */}
 
         </ScrollView>
     )

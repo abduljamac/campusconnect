@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
-import { Card, ListItem, Button, Icon, Text, Avatar } from 'react-native-elements'
+import { ListItem } from 'react-native-elements'
 import { Context as Feed } from '../context/Feed'
 import { useRoute } from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
 import Loading from '../components/Loading'
 
 const FreelancerFeedScreen = ({ navigation }) => {
+
+    const { navigate } = useNavigation();
 
     const { state, fetchFreelancers } = useContext(Feed)
 
@@ -20,8 +23,8 @@ const FreelancerFeedScreen = ({ navigation }) => {
     }, [navigation])
 
 
-    { categories !== undefined ? console.log(categories.category) : null }
-    console.log(state)
+    // { categories !== undefined ? console.log(categories.category) : null }
+    // console.log(state)
 
 
 
@@ -33,10 +36,10 @@ const FreelancerFeedScreen = ({ navigation }) => {
                         data={state}
                         keyExtractor={(item) => item.userId}
                         renderItem={({ item }) => {
-
                             if (item.category == categories.category) {
                                 return (
                                     <ListItem
+                
                                         key={item.userId}
                                         leftAvatar={{ source: { uri: item.profileImage } }}
                                         title={item.handle}
@@ -44,12 +47,14 @@ const FreelancerFeedScreen = ({ navigation }) => {
                                         subtitle={item.bio}
                                         titleStyle={styles.title}
                                         subtitleStyle={styles.subtitle}
+                                        onPress={ () => navigate('FreelancerPage' , { freelancer: item  } ) }
                                     />
                                 )
                             } else {
                                 return null
                             }
                         }}
+                        extraData={state}
                     />
                 ) : <Loading />
             }

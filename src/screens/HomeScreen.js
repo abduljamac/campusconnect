@@ -27,7 +27,6 @@ const HomeScreen = () => {
     ]
 
     onPressCategory = item => {
-        // navigation.navigate('FreelancerFeedScreen', { item })
         navigate('FreelancerFeedScreen', { categories: item })
     }
 
