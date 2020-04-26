@@ -22,12 +22,6 @@ const FreelancerFeedScreen = ({ navigation }) => {
         return freelancers
     }, [navigation])
 
-
-    // { categories !== undefined ? console.log(categories.category) : null }
-    // console.log(state)
-
-
-
     return (
         <View>
             {

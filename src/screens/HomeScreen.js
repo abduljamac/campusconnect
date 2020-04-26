@@ -2,13 +2,11 @@ import React from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, TouchableHighlight, Image } from 'react-native'
 import {useNavigation} from '@react-navigation/native';
 
-// screen sizing
 const { width, height } = Dimensions.get('window');
-// orientation must fixed
 const SCREEN_WIDTH = width < height ? width : height;
 
 const recipeNumColums = 2;
-// item size
+
 const RECIPE_ITEM_HEIGHT = 150;
 const RECIPE_ITEM_MARGIN = 20;
 
@@ -50,26 +48,6 @@ const HomeScreen = () => {
                 renderItem={this.renderCategories}
                 keyExtractor={item => `${item.id}`}
             />
-
-            {/* <FlatList
-                verticle
-                showsVerticalScrollIndicator={false}
-                numColumns={2}
-                data={categories}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => {
-                    return (
-                        <TouchableHighlight onPress={() => navigation.navigate('FreelancerFeed')}>
-                            <View style={styles.container}>
-                                <Image style={styles.photo} source={item.img} />
-                                <Text style={styles.title}>{item.category}</Text>
-                            </View>
-                        </TouchableHighlight>
-
-
-                    )
-                }}
-            /> */}
 
         </View>
     )

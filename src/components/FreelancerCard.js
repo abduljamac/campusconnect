@@ -1,36 +1,27 @@
-import React, { useContext, useEffect } from 'react'
-import { Dimensions, Image, StyleSheet, Text, ScrollView, View } from "react-native"
+import React from 'react'
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native"
 import { Entypo as Icon } from "@expo/vector-icons"
-import { useRoute } from '@react-navigation/native'
 
 const { width } = Dimensions.get("window");
 
-const FreelancerPage = ({ }) => {
-
-    const { params } = useRoute();
-    const { freelancer } = params
-
-    { freelancer !== undefined ? console.log(freelancer) : null }
-
-
-
+const FreelancerCard = ({ freelancer }) => {
     return (
-        <ScrollView>
+        <>
             <View style={styles.container}>
                 <View style={styles.user}>
                     <View>
                         <Text style={styles.title}>{freelancer.handle}</Text>
                         <View style={styles.details}>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <Icon name="star" color="rgb(255, 56, 92)" size={18} />
+                                <Icon name="star" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>4.93 (891)</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <Icon name="email" color="rgb(255, 56, 92)" size={18} />
+                                <Icon name="email" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>{freelancer.email}</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <Icon name="phone" color="rgb(255, 56, 92)" size={18} />
+                                <Icon name="phone" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>07717727712</Text>
                             </View>
 
@@ -39,25 +30,11 @@ const FreelancerPage = ({ }) => {
                     <Image style={styles.avatar} source={require("../../assets/no-img.jpg")} />
                 </View>
                 <Text style={styles.text}> {freelancer.bio} </Text>
-
-
-                <View>
-                    <View style={styles.divider} />
-
-                </View>
+                <View style={styles.divider} />
             </View>
-
-            {/* 
-            <Image
-                style={styles.image}
-                resizeMode="cover"
-                source={require("../../assets/authHeader.png")}
-            /> */}
-            
-        </ScrollView>
+        </>
     )
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -103,7 +80,10 @@ const styles = StyleSheet.create({
         width: 76,
         height: 76,
         borderRadius: 76 / 2
+    },
+    scene: {
+        flex: 1,
     }
 });
 
-export default FreelancerPage
+export default FreelancerCard

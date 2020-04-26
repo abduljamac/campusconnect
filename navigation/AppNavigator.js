@@ -17,7 +17,7 @@ import Home from '../src/screens/HomeScreen'
 import EditProfileScreen from '../src/screens/EditProfileScreen'
 import MessagesScreen from '../src/screens/MessagesScreen'
 import FreelancerFeedScreen from '../src/screens/FreelancerFeedScreen'
-import FreelancerPage from '../src/components/FreelancerPage'
+import FreelancerPage from '../src/screens/FreelancerPage'
 
 import { AuthContext } from '../src/context/AuthContext'
 import { Provider as ProfilePage } from '../src/context/ProfilePage'
@@ -107,14 +107,6 @@ const AppNavigator = () => {
         { token: null, errorMessage: null, successMessage: null }
     )
 
-
-    useEffect(() => {
-        Font.loadAsync({
-            Roboto: require('native-base/Fonts/Roboto.ttf'),
-            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-            ...Ionicons.font,
-        })
-    }, [])
 
     useEffect(() => {
         const tryLocalSignin = async () => {

@@ -1,10 +1,22 @@
 import React, { useContext, useEffect } from 'react'
-import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
+import { View, StyleSheet, Text, Image, ScrollView, Dimensions } from 'react-native'
 import { Button } from 'react-native-elements'
 import { AuthContext } from '../context/AuthContext'
 import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
 
+
+import { TabView, SceneMap } from 'react-native-tab-view'
+
+const FirstRoute = () => (
+    <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+)
+
+const SecondRoute = () => (
+    <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+)
+
+const initialLayout = { width: Dimensions.get('window').width }
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -19,6 +31,17 @@ const ProfileScreen = ({ navigation }) => {
     }, [navigation])
 
     console.log(state.user);
+
+    const [index, setIndex] = React.useState(0);
+    const [routes] = React.useState([
+        { key: 'first', title: 'First' },
+        { key: 'second', title: 'Second' },
+    ])
+
+    const renderScene = SceneMap({
+        first: FirstRoute,
+        second: SecondRoute,
+    })
 
     return (
         <ScrollView style={styles.scroll}>
@@ -47,17 +70,17 @@ const ProfileScreen = ({ navigation }) => {
 
                             <Button
                                 title='Sign Out'
-                                buttonStyle={{ borderColor: '#E74C3C', marginRight: 5 }}
+                                buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
                                 type="outline"
-                                titleStyle={{ color: '#273746' }}
+                                titleStyle={{ color: '#17202A' }}
                                 onPress={() => signOut()}
                             />
                             
                             <Button
                                 title="Edit Profile"
-                                buttonStyle={{ borderColor: '#E74C3C' }}
+                                buttonStyle={{ borderColor: '#17202A' }}
                                 type="outline"
-                                titleStyle={{ color: '#273746' }}
+                                titleStyle={{ color: '#17202A' }}
                                 onPress={() => navigation.navigate('EditProfileScreen')}
                             />
 
@@ -65,14 +88,21 @@ const ProfileScreen = ({ navigation }) => {
 
                     </View> : <Loading />
             }
-{/* 
-            <Button
+
+            {/* <Button
                 title='Sign Out'
                 buttonStyle={{ borderColor: '#E74C3C', marginRight: 5 }}
                 type="outline"
                 titleStyle={{ color: '#273746' }}
                 onPress={() => signOut()}
             /> */}
+
+            <TabView
+                navigationState={{ index, routes }}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                initialLayout={initialLayout}
+            />
 
         </ScrollView>
     )
