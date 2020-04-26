@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { useRoute } from '@react-navigation/native'
-import FreelancerCard from '../components/FreelancerCard'
-
 import { TabView, SceneMap } from 'react-native-tab-view'
+import FreelancerCard from '../components/FreelancerCard'
+import Review from '../components/Review'
+import Gallary from '../components/Gallary'
 
-const FirstRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-)
 
-const SecondRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-)
 
 const initialLayout = { width: Dimensions.get('window').width }
 
@@ -20,18 +15,18 @@ const FreelancerPage = ({ }) => {
     const { params } = useRoute();
     const { freelancer } = params
 
-    { freelancer !== undefined ? console.log(freelancer) : null }
+    { freelancer !== undefined ? console.table(freelancer) : null }
 
     const [index, setIndex] = useState(0)
 
     const [routes] = useState([
-        { key: 'first', title: 'First' },
-        { key: 'second', title: 'Second' },
+        { key: 'first', title: 'Gallary' },
+        { key: 'second', title: 'Review' },
     ])
 
     const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
+        first: Review,
+        second: Gallary,
     })
 
 

@@ -6,18 +6,6 @@ import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
 
 
-import { TabView, SceneMap } from 'react-native-tab-view'
-
-const FirstRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-)
-
-const SecondRoute = () => (
-    <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-)
-
-const initialLayout = { width: Dimensions.get('window').width }
-
 const ProfileScreen = ({ navigation }) => {
 
     const { signOut } = useContext(AuthContext)
@@ -32,20 +20,10 @@ const ProfileScreen = ({ navigation }) => {
 
     console.log(state.user);
 
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
-        { key: 'first', title: 'First' },
-        { key: 'second', title: 'Second' },
-    ])
-
-    const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-    })
 
     return (
         <ScrollView style={styles.scroll}>
-                
+
             {
 
                 state.user ?
@@ -75,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
                                 titleStyle={{ color: '#17202A' }}
                                 onPress={() => signOut()}
                             />
-                            
+
                             <Button
                                 title="Edit Profile"
                                 buttonStyle={{ borderColor: '#17202A' }}
@@ -97,12 +75,6 @@ const ProfileScreen = ({ navigation }) => {
                 onPress={() => signOut()}
             /> */}
 
-            <TabView
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                initialLayout={initialLayout}
-            />
 
         </ScrollView>
     )

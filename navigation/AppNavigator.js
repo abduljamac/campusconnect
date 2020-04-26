@@ -7,6 +7,7 @@ import { AsyncStorage } from 'react-native'
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
+import jwtDecode from 'jwt-decode'
 
 import CampusConnectApi from '../src/api/CampusConnectApi'
 import Loading from '../src/components/Loading'
@@ -111,7 +112,8 @@ const AppNavigator = () => {
     useEffect(() => {
         const tryLocalSignin = async () => {
             const token = await AsyncStorage.getItem('token')
-            if (token) {
+            const decodedToken = jwtDecode(token)
+            if (!decodedToken.exp * 1000 < Date.now()) {
                 dispatch({ type: 'SIGN_IN', payload: token })
             }
         }

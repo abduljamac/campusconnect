@@ -30,7 +30,6 @@ const FreelancerCard = ({ freelancer }) => {
                     <Image style={styles.avatar} source={require("../../assets/no-img.jpg")} />
                 </View>
                 <Text style={styles.text}> {freelancer.bio} </Text>
-                <View style={styles.divider} />
             </View>
         </>
     )
