@@ -1,12 +1,9 @@
-// import React from 'react'
-// import { StyleSheet, Text, View } from 'react-native'
-
-import React from 'react';
+import React from 'react'
 import { StyleSheet, View, Image, Dimensions, Text, TouchableHighlight } from 'react-native'
 import { Icon } from '@expo/vector-icons'
 
-const { width } = Dimensions.get('window');
-const PADDING = 30;
+const { width } = Dimensions.get('window')
+const PADDING = 30
 
 const Category = () => {
     return (

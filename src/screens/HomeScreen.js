@@ -1,19 +1,19 @@
 import React from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, TouchableHighlight, Image } from 'react-native'
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native'
 
-const { width, height } = Dimensions.get('window');
-const SCREEN_WIDTH = width < height ? width : height;
+const { width, height } = Dimensions.get('window')
+const SCREEN_WIDTH = width < height ? width : height
 
-const recipeNumColums = 2;
+const NumColums = 2
 
-const RECIPE_ITEM_HEIGHT = 150;
-const RECIPE_ITEM_MARGIN = 20;
+const ITEM_HEIGHT = 150
+const ITEM_MARGIN = 20
 
 
 const HomeScreen = () => {
 
-    const { navigate } = useNavigation();
+    const { navigate } = useNavigation()
 
     const categories = [
         { id: 1, category: 'Tutoring', img: require('../../assets/logo.png') },
@@ -58,17 +58,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: RECIPE_ITEM_MARGIN,
+        marginLeft: ITEM_MARGIN,
         marginTop: 20,
-        width: (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) / recipeNumColums,
-        height: RECIPE_ITEM_HEIGHT + 75,
+        width: (SCREEN_WIDTH - (NumColums + 1) * ITEM_MARGIN) / NumColums,
+        height: ITEM_HEIGHT + 75,
         borderColor: '#cccccc',
         borderWidth: 0.5,
         borderRadius: 15
     },
     photo: {
-        width: (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) / recipeNumColums,
-        height: RECIPE_ITEM_HEIGHT,
+        width: (SCREEN_WIDTH - (NumColums + 1) * ITEM_MARGIN) / NumColums,
+        height: ITEM_HEIGHT,
         borderRadius: 15,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0

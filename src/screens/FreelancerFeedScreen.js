@@ -3,16 +3,16 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { Context as Feed } from '../context/Feed'
 import { useRoute } from '@react-navigation/native'
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native'
 import Loading from '../components/Loading'
 
 const FreelancerFeedScreen = ({ navigation }) => {
 
-    const { navigate } = useNavigation();
+    const { navigate } = useNavigation()
 
     const { state, fetchFreelancers } = useContext(Feed)
 
-    const { params } = useRoute();
+    const { params } = useRoute()
     const { categories } = params
 
     useEffect(() => {

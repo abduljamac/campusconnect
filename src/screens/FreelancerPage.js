@@ -12,10 +12,10 @@ const initialLayout = { width: Dimensions.get('window').width }
 
 const FreelancerPage = ({ }) => {
 
-    const { params } = useRoute();
+    const { params } = useRoute()
     const { freelancer } = params
 
-    { freelancer !== undefined ? console.table(freelancer) : null }
+    { freelancer !== undefined ? console.log(freelancer) : null }
 
     const [index, setIndex] = useState(0)
 
@@ -32,7 +32,9 @@ const FreelancerPage = ({ }) => {
 
     return (
         <ScrollView style={styles.scroll}>
+
             <FreelancerCard freelancer={freelancer} />
+
             <TabView
                 navigationState={{ index, routes }}
                 renderScene={renderScene}
@@ -52,6 +54,6 @@ const styles = StyleSheet.create({
     scene: {
         flex: 1,
     }
-});
+})
 
 export default FreelancerPage

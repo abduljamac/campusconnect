@@ -2,15 +2,17 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native"
 import { Entypo as Icon } from "@expo/vector-icons"
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get("window")
 
 const FreelancerCard = ({ freelancer }) => {
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.user}>
+
                     <View>
                         <Text style={styles.title}>{freelancer.handle}</Text>
+
                         <View style={styles.details}>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="star" color="#17202A" size={18} />
@@ -24,12 +26,16 @@ const FreelancerCard = ({ freelancer }) => {
                                 <Icon name="phone" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>07717727712</Text>
                             </View>
-
                         </View>
+
                     </View>
+
                     <Image style={styles.avatar} source={require("../../assets/no-img.jpg")} />
+    
                 </View>
+
                 <Text style={styles.text}> {freelancer.bio} </Text>
+                
             </View>
         </>
     )
@@ -83,6 +89,6 @@ const styles = StyleSheet.create({
     scene: {
         flex: 1,
     }
-});
+})
 
 export default FreelancerCard
