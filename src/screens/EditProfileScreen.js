@@ -4,12 +4,12 @@ import { Text, Input, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { AuthContext } from '../context/AuthContext'
 
-const EditProfileScreen = ( ) => {
+const EditProfileScreen = () => {
 
-    const [uni, setUni] = useState('')
     const [bio, setBio] = useState('')
     const [category, setCategory] = useState('')
     const [price, setPrice] = useState('')
+    const [number, setNumber] = useState('')
 
     const { editProfile } = useContext(AuthContext)
 
@@ -17,16 +17,6 @@ const EditProfileScreen = ( ) => {
         <View style={styles.container}>
             <Spacer>
                 <Text h3 style={styles.header}> Edit Profile </Text>
-            </Spacer>
-
-            <Spacer>
-                <Input
-                    label='University'
-                    value={uni}
-                    onChangeText={newText => setUni(newText)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
             </Spacer>
 
             <Spacer>
@@ -60,10 +50,20 @@ const EditProfileScreen = ( ) => {
             </Spacer>
 
             <Spacer>
+                <Input
+                    label='Phone Number'
+                    value={number}
+                    onChangeText={newText => setNumber(newText)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                />
+            </Spacer>
+
+            <Spacer>
                 <Button
                     buttonStyle={{ backgroundColor: '#273746' }}
                     title="Submit Details"
-                    onPress={() => editProfile({ uni, bio, category, price })}
+                    onPress={() => editProfile({ bio, category, price, number })}
                 />
             </Spacer>
 

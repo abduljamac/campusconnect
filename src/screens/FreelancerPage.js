@@ -15,7 +15,7 @@ const FreelancerPage = ({ }) => {
     const { params } = useRoute()
     const { freelancer } = params
 
-    { freelancer !== undefined ? console.log(freelancer) : null }
+    // { freelancer !== undefined ? console.log(freelancer) : null }
 
     const [index, setIndex] = useState(0)
 

@@ -18,11 +18,13 @@ const ProfileScreen = ({ navigation }) => {
         return userDetails
     }, [navigation])
 
+    console.log(state)
+
     return (
         <ScrollView style={styles.scroll}>
 
             {
-                state.user ?
+                state.user !== undefined ?
                     <View style={styles.container}>
 
                         <View style={{ marginTop: 20, alignItems: "center" }}>
@@ -32,9 +34,9 @@ const ProfileScreen = ({ navigation }) => {
                                     style={styles.avatar}
                                 />
                             </View>
-                            <Text style={styles.userNameText}>Abdul</Text>
+                            <Text style={styles.userNameText}>{state.user.handle}</Text>
                             <View style={styles.userBioRow}>
-                                <Text style={styles.userBioText}>Hello my name is Abdul I'm computer science tutor</Text>
+                                <Text style={styles.userBioText}>{state.user.bio  !== undefined ? null : state.user.bio}</Text>
                             </View>
 
                         </View>
@@ -58,7 +60,7 @@ const ProfileScreen = ({ navigation }) => {
                             />
 
                         </View>
-                    </View> : <Loading />
+                    </View> :   <Loading />
             }
 
         </ScrollView>

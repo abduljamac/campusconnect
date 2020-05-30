@@ -22,10 +22,6 @@ const FreelancerCard = ({ freelancer }) => {
                                 <Icon name="email" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>{freelancer.email}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <Icon name="phone" color="#17202A" size={18} />
-                                <Text style={styles.detailText}>07717727712</Text>
-                            </View>
                         </View>
 
                     </View>

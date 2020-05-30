@@ -16,7 +16,7 @@ import SignUp from '../src/screens/SignUpScreen'
 import Profile from '../src/screens/ProfileScreen'
 import Home from '../src/screens/HomeScreen'
 import EditProfileScreen from '../src/screens/EditProfileScreen'
-import MessagesScreen from '../src/screens/MessagesScreen'
+import FavoritesScreen from '../src/screens/FavoritesScreen'
 import FreelancerFeedScreen from '../src/screens/FreelancerFeedScreen'
 import FreelancerPage from '../src/screens/FreelancerPage'
 
@@ -28,7 +28,7 @@ const AuthStack = createStackNavigator()
 const HomeStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
 const EditProfileStack = createStackNavigator()
-const MessagesStack = createStackNavigator()
+const FavoritesStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
@@ -41,7 +41,7 @@ const AuthStackScreen = () => (
 
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
         <HomeStack.Screen name="FreelancerFeedScreen" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
         <HomeStack.Screen name="FreelancerPage" component={FreelancerPage} options={{ title: 'Freelancer Page', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
     </HomeStack.Navigator>
@@ -49,30 +49,30 @@ const HomeStackSreen = () => (
 
 const ProfileStackSreen = () => (
     <ProfileStack.Navigator>
-        <ProfileStack.Screen name="Profile" component={Profile} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <ProfileStack.Screen name="Profile" component={Profile} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
         <ProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#17202A' }, headerTintColor: '#fff' }} />
     </ProfileStack.Navigator>
 )
 
 const EditProfileStackScreen = () => (
     <EditProfileStack.Navigator>
-        <EditProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <EditProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
     </EditProfileStack.Navigator>
 )
 
 
-const MessagesStackScreen = () => (
-    <MessagesStack.Navigator>
-        <MessagesStack.Screen name="Messages" component={MessagesScreen} options={{ title: 'Messages', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
-    </MessagesStack.Navigator>
+const FavoritesStackScreen = () => (
+    <FavoritesStack.Navigator>
+        <FavoritesStack.Screen name="Favorites" component={FavoritesScreen} options={{ title: 'Favorites', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
+    </FavoritesStack.Navigator>
 )
 
 
 const TabsScreen = () => (
     <Tabs.Navigator initialRouteName={"Home"}>
-        <Tabs.Screen name="Home" component={HomeStackSreen} options={{ tabBarIcon: () => (<AntDesign name="home" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
+        <Tabs.Screen name="My Feed" component={HomeStackSreen} options={{ tabBarIcon: () => (<AntDesign name="home" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
         <Tabs.Screen name="Profile" component={ProfileStackSreen} options={{ tabBarIcon: () => (<AntDesign name="profile" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
-        <Tabs.Screen name="Messages" component={MessagesStackScreen} options={{ tabBarIcon: () => (<AntDesign name="message1" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
+        <Tabs.Screen name="Favorites" component={FavoritesStackScreen} options={{ tabBarIcon: () => (<AntDesign name="star" size={20} color="black" />), tabBarOptions: { showIcon: true } }} />
     </Tabs.Navigator>
 )
 
@@ -184,7 +184,7 @@ const AppNavigator = () => {
         return <Loading />
     }
 
-    console.log(state.token)
+    // console.log(state.token)
     return (
 
         <Feed>

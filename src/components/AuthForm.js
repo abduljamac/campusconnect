@@ -9,6 +9,7 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [handle, setHandle] = useState('')
+    const [uni, setUni] = useState('')
 
     return (
         <>
@@ -60,10 +61,22 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
                             <Spacer>
                                 <Item inlineLabel>
-                                    <Label>Name</Label>
+                                    <Label>Full Name</Label>
                                     <Input
                                         value={handle}
                                         onChangeText={newText => setHandle(newText)}
+                                        autoCapitalize="none"
+                                        autoCorrect={false}
+                                    />
+                                </Item>
+                            </Spacer>
+
+                            <Spacer>
+                                <Item inlineLabel>
+                                    <Label>University</Label>
+                                    <Input
+                                        value={uni}
+                                        onChangeText={newText => setUni(newText)}
                                         autoCapitalize="none"
                                         autoCorrect={false}
                                     />

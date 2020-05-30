@@ -23,3 +23,8 @@ npm start
 ```
 
 3. Choose iOS or Android Simulator
+
+### Campusconnect Backend;
+```
+https://github.com/abduljamac/campusconnect-backend
+```

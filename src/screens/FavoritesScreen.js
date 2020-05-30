@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const MessagesScreen = () => {
+const FavoritesScreen = () => {
     return (
         <View>
             <Text> Welcome to Messages Screen </Text>
@@ -11,4 +11,4 @@ const MessagesScreen = () => {
 
 const styles = StyleSheet.create({})
 
-export default MessagesScreen
+export default FavoritesScreen
