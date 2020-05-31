@@ -2,7 +2,6 @@ import createDataContext from './ContextCreator'
 import CampusConnectApi from '../api/CampusConnectApi'
 
 const userDetailReducer = (state, action) => {
-
     switch (action.type) {
         case 'GET_USER_DETAILS':
             return action.payload
@@ -22,5 +21,4 @@ export const { Provider, Context } = createDataContext(
     userDetailReducer,
     { fetchUserDetails },
     { }
-    // { errorMessage: '' }
 )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import FreelancerCard from '../components/FreelancerCard'
@@ -10,7 +10,7 @@ import Gallary from '../components/Gallary'
 
 const initialLayout = { width: Dimensions.get('window').width }
 
-const FreelancerPage = ({ }) => {
+const FreelancerPage = ({}) => {
 
     const { params } = useRoute()
     const { freelancer } = params
@@ -20,14 +20,14 @@ const FreelancerPage = ({ }) => {
     const [index, setIndex] = useState(0)
 
     const [routes] = useState([
-        { key: 'first', title: 'Gallary' },
-        { key: 'second', title: 'Review' },
+        { key: 'first', title: 'Review' },
+        { key: 'second', title: 'Gallary' },
     ])
 
-    const renderScene = SceneMap({
-        first: Review,
-        second: Gallary,
-    })
+    // const renderScene = SceneMap({
+    //     first: Review,
+    //     second: Gallary,
+    // })
 
 
     return (
@@ -37,7 +37,10 @@ const FreelancerPage = ({ }) => {
 
             <TabView
                 navigationState={{ index, routes }}
-                renderScene={renderScene}
+                renderScene={SceneMap({
+                    first: () => <Review freelancer={freelancer} />,
+                    second: Gallary,
+                })}
                 onIndexChange={setIndex}
                 initialLayout={initialLayout}
             />

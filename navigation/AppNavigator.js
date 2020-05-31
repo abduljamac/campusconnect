@@ -19,10 +19,12 @@ import EditProfileScreen from '../src/screens/EditProfileScreen'
 import FavoritesScreen from '../src/screens/FavoritesScreen'
 import FreelancerFeedScreen from '../src/screens/FreelancerFeedScreen'
 import FreelancerPage from '../src/screens/FreelancerPage'
+import LeaveAReviewScreen from '../src/screens/LeaveAReviewScreen'
 
 import { AuthContext } from '../src/context/AuthContext'
 import { Provider as ProfilePage } from '../src/context/ProfilePage'
 import { Provider as Feed } from '../src/context/Feed'
+import { Provider as Review } from '../src/context/Review'
 
 const AuthStack = createStackNavigator()
 const HomeStack = createStackNavigator()
@@ -31,6 +33,7 @@ const EditProfileStack = createStackNavigator()
 const FavoritesStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
+const LeaveAReviewStack = createStackNavigator()
 
 const AuthStackScreen = () => (
     <AuthStack.Navigator>
@@ -42,8 +45,9 @@ const AuthStackScreen = () => (
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
-        <HomeStack.Screen name="FreelancerFeedScreen" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
-        <HomeStack.Screen name="FreelancerPage" component={FreelancerPage} options={{ title: 'Freelancer Page', headerStyle: { backgroundColor: '#E74C3C' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="FreelancerFeedScreen" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="FreelancerPage" component={FreelancerPage} options={{ title: 'Freelancer Page', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="LeaveAReviewScreen" component={LeaveAReviewScreen} options={{ title: 'Leave A Review', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
     </HomeStack.Navigator>
 )
 
@@ -59,7 +63,6 @@ const EditProfileStackScreen = () => (
         <EditProfileStack.Screen name="Edit Profile" component={EditProfileScreen} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
     </EditProfileStack.Navigator>
 )
-
 
 const FavoritesStackScreen = () => (
     <FavoritesStack.Navigator>
@@ -115,6 +118,8 @@ const AppNavigator = () => {
             const decodedToken = jwtDecode(token)
             if (!decodedToken.exp * 1000 < Date.now()) {
                 dispatch({ type: 'SIGN_IN', payload: token })
+            } else {
+                await AsyncStorage.removeItem('token')
             }
         }
         tryLocalSignin()
@@ -186,22 +191,23 @@ const AppNavigator = () => {
 
     // console.log(state.token)
     return (
-
-        <Feed>
-            <ProfilePage>
-                <AuthContext.Provider value={authContext}>
-                    <NavigationContainer>
-                        {
-                            state.token === null ? (
-                                <AuthStackScreen />
-                            ) : (
-                                    <DrawerScreen />
-                                )
-                        }
-                    </NavigationContainer>
-                </AuthContext.Provider>
-            </ProfilePage>
-        </Feed>
+        <Review>
+            <Feed>
+                <ProfilePage>
+                    <AuthContext.Provider value={authContext}>
+                        <NavigationContainer>
+                            {
+                                state.token === null ? (
+                                    <AuthStackScreen />
+                                ) : (
+                                        <DrawerScreen />
+                                    )
+                            }
+                        </NavigationContainer>
+                    </AuthContext.Provider>
+                </ProfilePage>
+            </Feed>
+        </Review>
     )
 }
 

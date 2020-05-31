@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { View, StyleSheet, Text, Image, ScrollView, Dimensions } from 'react-native'
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import { AuthContext } from '../context/AuthContext'
 import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
-
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -36,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
                             </View>
                             <Text style={styles.userNameText}>{state.user.handle}</Text>
                             <View style={styles.userBioRow}>
-                                <Text style={styles.userBioText}>{state.user.bio  !== undefined ? null : state.user.bio}</Text>
+                                <Text style={styles.userBioText}>{state.user.bio !== undefined ? state.user.bio : null}</Text>
                             </View>
 
                         </View>
@@ -60,7 +59,14 @@ const ProfileScreen = ({ navigation }) => {
                             />
 
                         </View>
-                    </View> :   <Loading />
+                    </View> :  
+                            <Button
+                                title='Sign Out'
+                                buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
+                                type="outline"
+                                titleStyle={{ color: '#17202A' }}
+                                onPress={() => signOut()}
+                            />
             }
 
         </ScrollView>

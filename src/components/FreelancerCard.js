@@ -5,6 +5,7 @@ import { Entypo as Icon } from "@expo/vector-icons"
 const { width } = Dimensions.get("window")
 
 const FreelancerCard = ({ freelancer }) => {
+    console.log(freelancer)
     return (
         <>
             <View style={styles.container}>
@@ -21,6 +22,10 @@ const FreelancerCard = ({ freelancer }) => {
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="email" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>{freelancer.email}</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                                <Icon name="phone" color="#17202A" size={18} />
+                                <Text style={styles.detailText}>{freelancer.number}</Text>
                             </View>
                         </View>
 

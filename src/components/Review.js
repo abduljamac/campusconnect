@@ -1,10 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, Button } from 'react-native'
+import {useNavigation} from '@react-navigation/native'
 
-const Review = () => {
+const Review = ({ freelancer }) => {
+    
+    const { navigate } = useNavigation()
+
     return (
         <View>
-            <Text> Review </Text>
+            <Button
+                title='Leave a Review!'
+                buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
+                onPress={() => navigate('LeaveAReviewScreen', { freelancer: freelancer  })}
+            />
         </View>
     )
 }
