@@ -1,12 +1,31 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet, Text, View, Button } from "react-native"
+import { Dimensions, Image, StyleSheet, Text, View, TouchableOpacity, Clipboard } from "react-native"
+import { Button } from 'react-native-elements'
 import { Entypo as Icon } from "@expo/vector-icons"
-import * as Linking from 'expo-linking';
+import { AsyncStorage } from 'react-native'
 
 const { width } = Dimensions.get("window")
 
 const FreelancerCard = ({ freelancer }) => {
-    console.log(freelancer)
+    // console.log(freelancer)
+
+    const favFreelanceArray = []
+
+    const addToFav = async(freelacer) => {
+        favFreelanceArray.push(freelacer)
+        // console.log(favFreelanceArray);
+        let storedData = AsyncStorage.getItem('favFreelancers')
+        storedData = JSON.parse(storedData)
+        storedData.push(favFreelanceArray)
+        
+        try {
+            await AsyncStorage.setItem('favFreelancers', JSON.stringify(storedData));
+        } catch (error) {
+            // Error saving data
+            console.log(error)
+        }
+    }
+
     return (
         <>
             <View style={styles.container}>
@@ -16,18 +35,26 @@ const FreelancerCard = ({ freelancer }) => {
                         <Text style={styles.title}>{freelancer.handle}</Text>
 
                         <View style={styles.details}>
-                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
+
+
+                            <TouchableOpacity onPress={() => Clipboard.setString(`${freelancer.email}`)} style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="email" color="#17202A" size={18} />
-                                {/* <Text style={styles.detailText} onPress={() => Linking.openURL('mailto:support@example.com')>{freelancer.email}</Text> */}
-                                <Button
-                                    title={freelancer.email}
-                                    onPress={() => Linking.mailto('mailto:support@example.com')}
-                                />
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                                <Text style={styles.detailText} >{freelancer.email}</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => Clipboard.setString(`${freelancer.number}`)} style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="phone" color="#17202A" size={18} />
                                 <Text style={styles.detailText}>{freelancer.number}</Text>
-                            </View>
+                            </TouchableOpacity>
+
+                            <Button
+                                title='Favorite'
+                                buttonStyle={{ borderColor: '#17202A', margin: 5 }}
+                                type="outline"
+                                onPress={() => addToFav( freelancer )}
+                            />
+
+
                         </View>
 
                     </View>

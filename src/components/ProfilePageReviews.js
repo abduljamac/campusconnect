@@ -4,7 +4,7 @@ import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
 
-const ProfilePageReviews = ({ navigation, freelancer }) => {
+const ProfilePageReviews = ({ navigation }) => {
 
     const { state, getAllReviews } = useContext(Review)
 
@@ -12,8 +12,8 @@ const ProfilePageReviews = ({ navigation, freelancer }) => {
         getAllReviews()
     }, [navigation])
 
-    console.log(state)
-    console.log(freelancer)
+    // console.log(state)
+    // console.log(freelancer)
 
     return (
         <View>
