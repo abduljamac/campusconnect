@@ -1,6 +1,7 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native"
+import { Dimensions, Image, StyleSheet, Text, View, Button } from "react-native"
 import { Entypo as Icon } from "@expo/vector-icons"
+import * as Linking from 'expo-linking';
 
 const { width } = Dimensions.get("window")
 
@@ -16,12 +17,12 @@ const FreelancerCard = ({ freelancer }) => {
 
                         <View style={styles.details}>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <Icon name="star" color="#17202A" size={18} />
-                                <Text style={styles.detailText}>4.93 (891)</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="email" color="#17202A" size={18} />
-                                <Text style={styles.detailText}>{freelancer.email}</Text>
+                                {/* <Text style={styles.detailText} onPress={() => Linking.openURL('mailto:support@example.com')>{freelancer.email}</Text> */}
+                                <Button
+                                    title={freelancer.email}
+                                    onPress={() => Linking.mailto('mailto:support@example.com')}
+                                />
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="phone" color="#17202A" size={18} />
@@ -32,11 +33,11 @@ const FreelancerCard = ({ freelancer }) => {
                     </View>
 
                     <Image style={styles.avatar} source={require("../../assets/no-img.jpg")} />
-    
+
                 </View>
 
                 <Text style={styles.text}> {freelancer.bio} </Text>
-                
+
             </View>
         </>
     )

@@ -3,20 +3,20 @@ import CampusConnectApi from '../api/CampusConnectApi'
 
 const feedReducer = (state, action) => {
     switch (action.type) {
-        case 'FETCH_FREELANCERS':
+        case 'FETCH_USERS':
             return action.payload
         default:
             return state
     }
 }
 
-const fetchFreelancers = dispatch => async () => {
-    const response = await CampusConnectApi.get('/freelancers')
-    dispatch({ type: 'FETCH_FREELANCERS', payload: response.data })
+const fetchUsers = dispatch => async () => {
+    const response = await CampusConnectApi.get('/users')
+    dispatch({ type: 'FETCH_USERS', payload: response.data })
 }
 
 export const { Provider, Context } = createDataContext(
     feedReducer,
-    { fetchFreelancers },
+    { fetchUsers },
     {}
 )

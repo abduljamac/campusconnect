@@ -1,9 +1,14 @@
-import React, { useContext, useEffect } from 'react'
-import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { View, StyleSheet, Text, Image, ScrollView, Dimensions } from 'react-native'
 import { Button } from 'react-native-elements'
 import { AuthContext } from '../context/AuthContext'
 import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
+import { TabView, SceneMap } from 'react-native-tab-view'
+import ProfilePageReviews from '../components/ProfilePageReviews'
+import Gallary from '../components/Gallary'
+
+const initialLayout = { width: Dimensions.get('window').width }
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -17,7 +22,14 @@ const ProfileScreen = ({ navigation }) => {
         return userDetails
     }, [navigation])
 
-    console.log(state)
+
+    const [index, setIndex] = useState(0)
+
+    const [routes] = useState([
+        { key: 'first', title: 'Reviews' },
+        { key: 'second', title: 'Gallary' },
+    ])
+
 
     return (
         <ScrollView style={styles.scroll}>
@@ -59,14 +71,27 @@ const ProfileScreen = ({ navigation }) => {
                             />
 
                         </View>
-                    </View> :  
-                            <Button
-                                title='Sign Out'
-                                buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
-                                type="outline"
-                                titleStyle={{ color: '#17202A' }}
-                                onPress={() => signOut()}
+
+                        <View>
+                            <TabView
+                                navigationState={{ index, routes }}
+                                renderScene={SceneMap({
+                                    first: () => <ProfilePageReviews data={state.user} />,
+                                    second: Gallary,
+                                })}
+                                onIndexChange={setIndex}
+                                initialLayout={initialLayout}
                             />
+                        </View>
+
+                    </View> :
+                    <Button
+                        title='Sign Out'
+                        buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
+                        type="outline"
+                        titleStyle={{ color: '#17202A' }}
+                        onPress={() => signOut()}
+                    />
             }
 
         </ScrollView>
@@ -110,7 +135,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
     },
 
 })

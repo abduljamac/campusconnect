@@ -33,7 +33,6 @@ const EditProfileStack = createStackNavigator()
 const FavoritesStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
-const LeaveAReviewStack = createStackNavigator()
 
 const AuthStackScreen = () => (
     <AuthStack.Navigator>
@@ -113,6 +112,16 @@ const AppNavigator = () => {
 
 
     useEffect(() => {
+        Font.loadAsync({
+            Roboto: require('native-base/Fonts/Roboto.ttf'),
+            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+            ...Ionicons.font,
+        })
+    }, [])
+
+
+
+    useEffect(() => {
         const tryLocalSignin = async () => {
             const token = await AsyncStorage.getItem('token')
             const decodedToken = jwtDecode(token)
@@ -169,14 +178,6 @@ const AppNavigator = () => {
         }),
         []
     )
-
-    useEffect(() => {
-        Font.loadAsync({
-            Roboto: require('native-base/Fonts/Roboto.ttf'),
-            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-            ...Ionicons.font,
-        })
-    }, [])
 
 
     useEffect(() => {

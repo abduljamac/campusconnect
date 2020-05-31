@@ -23,6 +23,21 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "scheme": "myapp",
+    "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [{
+            "scheme": "your-scheme"
+          }],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     }
   }
 }

@@ -3,27 +3,24 @@ import CampusConnectApi from '../api/CampusConnectApi'
 
 const reviewReducer = (state, action) => {
     switch (action.type) {
-        case 'SUCCESS_MESSAGE':
-            return { ...prevState, successMessage: action.payload }
-        case 'ADD_ERROR':
-            return { errorMessage: action.payload }
+        case 'FETCH_ALL_REVIEWS':
+                return action.payload
         default:
             return state
     }
 }
 
+const getAllReviews = dispatch => async () => {
+    const response = await CampusConnectApi.get('/reviews')
+    dispatch({ type: 'FETCH_ALL_REVIEWS', payload: response.data })
+}
+
 const sendReview = dispatch => async ({ body, freelancerId  }) => {
-    console.log(review, freelancerId)
-    try {
-        const response = await CampusConnectApi.post(`/review/${freelancerId}`, { body } )
-        dispatch({ type: 'SUCCESS_MESSAGE', payload: response.data })
-    } catch (error) {
-        dispatch({ type: 'ADD_ERROR', payload: error.message })
-    }
+    await CampusConnectApi.post(`/review/${freelancerId}`, { body } )
 }
 
 export const { Provider, Context } = createDataContext(
     reviewReducer,
-    { sendReview },
+    { getAllReviews, sendReview },
     {}
 )

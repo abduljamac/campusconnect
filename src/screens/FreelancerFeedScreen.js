@@ -10,16 +10,16 @@ const FreelancerFeedScreen = ({ navigation }) => {
 
     const { navigate } = useNavigation()
 
-    const { state, fetchFreelancers } = useContext(Feed)
+    const { state, fetchUsers } = useContext(Feed)
 
     const { params } = useRoute()
     const { categories } = params
 
     useEffect(() => {
-        const freelancers = navigation.addListener('focus', () => {
-            fetchFreelancers()
+        const users = navigation.addListener('focus', () => {
+            fetchUsers()
         })
-        return freelancers
+        return users
     }, [navigation])
 
     return (
@@ -33,7 +33,6 @@ const FreelancerFeedScreen = ({ navigation }) => {
                             if (item.category == categories.category) {
                                 return (
                                     <ListItem
-                
                                         key={item.userId}
                                         leftAvatar={{ source: { uri: item.profileImage } }}
                                         title={item.handle}

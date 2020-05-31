@@ -1,13 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { StyleSheet, View, SafeAreaView, Button, FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
 
-const Reviews = ({ navigation, freelancer }) => {
-
-    const { navigate } = useNavigation()
+const ProfilePageReviews = ({ navigation, freelancer }) => {
 
     const { state, getAllReviews } = useContext(Review)
 
@@ -19,22 +16,12 @@ const Reviews = ({ navigation, freelancer }) => {
     console.log(freelancer)
 
     return (
-        <SafeAreaView>
-            <View>
-                <Button
-                    title='Leave a Review!'
-                    buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
-                    onPress={() => navigate('LeaveAReviewScreen', { freelancer: freelancer })}
-                />
-            </View>
-
-            <View>
+        <View>
                 {
                     state !== undefined ? (
                         <FlatList
                             data={state}
                             renderItem={({ item }) => {
-                                if (item.freelancerId == freelancer.userId) {
                                     return (
                                         <ListItem
                                             key={item.freelancerId}
@@ -47,17 +34,13 @@ const Reviews = ({ navigation, freelancer }) => {
                                             rightTitleStyle={styles.rightTitle}
                                         />
                                     )
-                                } else {
-                                    return null
-                                }
                             }}
                             keyExtractor={(item) => item.createdAt}
                             extraData={state}
                         />
                     ) : <Loading />
                 }
-            </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -79,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Reviews
+export default ProfilePageReviews
