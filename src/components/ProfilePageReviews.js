@@ -8,10 +8,10 @@ import CampusConnectApi from '../api/CampusConnectApi'
 
 const ProfilePageReviews = ({ navigation, data }) => {
 
-    const { state, getAllReviews } = useContext(Review)
+    const { state, getAllUserReviews } = useContext(Review)
 
     useEffect(() => {
-        getAllReviews()
+        getAllUserReviews()
     }, [navigation])
 
 
@@ -19,7 +19,7 @@ const ProfilePageReviews = ({ navigation, data }) => {
         CampusConnectApi.delete(`/reviews/${reviewId}`)
             .then(() => {
                 Alert.alert("Review succesfully deleted")
-                getAllReviews()
+                getAllUserReviews()
             })
             .catch(err => {
                 Alert.alert(error)

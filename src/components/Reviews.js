@@ -4,15 +4,23 @@ import { useNavigation } from '@react-navigation/native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
+import { useIsFocused } from '@react-navigation/native';
 
 const Reviews = ({ navigation, freelancer }) => {
 
     const { navigate } = useNavigation()
     const { state, getAllReviews } = useContext(Review)
+    const isFocused = useIsFocused()
+
 
     useEffect(() => {
         getAllReviews()
     }, [navigation])
+
+
+    if (isFocused === false) {
+        getAllReviews()
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

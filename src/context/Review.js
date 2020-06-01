@@ -15,12 +15,17 @@ const getAllReviews = dispatch => async () => {
     dispatch({ type: 'FETCH_ALL_REVIEWS', payload: response.data })
 }
 
+const getAllUserReviews = dispatch => async () => {
+    const response = await CampusConnectApi.get('/reviews')
+    dispatch({ type: 'FETCH_ALL_REVIEWS', payload: response.data })
+}
+
 const sendReview = dispatch => async ({ body, freelancerId }) => {
     await CampusConnectApi.post(`/review/${freelancerId}`, { body })
 }
 
 export const { Provider, Context } = createDataContext(
     reviewReducer,
-    { getAllReviews, sendReview },
+    { getAllReviews, sendReview, getAllUserReviews },
     {}
 )
