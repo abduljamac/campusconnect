@@ -11,19 +11,20 @@ const FreelancerCard = ({ freelancer }) => {
 
     const favFreelanceArray = []
 
-    const addToFav = async(freelacer) => {
-        favFreelanceArray.push(freelacer)
-        // console.log(favFreelanceArray);
-        let storedData = AsyncStorage.getItem('favFreelancers')
-        storedData = JSON.parse(storedData)
-        storedData.push(favFreelanceArray)
-        
-        try {
-            await AsyncStorage.setItem('favFreelancers', JSON.stringify(storedData));
-        } catch (error) {
-            // Error saving data
-            console.log(error)
-        }
+    const addToFav = (favFreelancers) => {
+        AsyncStorage.getItem('favFreelancers', (err, result) => {
+            // const id = [1];
+            const favFreelanceArray = []
+            favFreelanceArray.push(favFreelancers)
+            if (result !== null) {
+                console.log('Data Found', result);
+                var newIds = JSON.parse(result).concat(favFreelanceArray);
+                AsyncStorage.setItem('favFreelancers', JSON.stringify(newIds));
+            } else {
+                console.log('Data Not Found');
+                AsyncStorage.setItem('favFreelancers', JSON.stringify(favFreelanceArray));
+            }
+        });
     }
 
     return (
@@ -51,7 +52,7 @@ const FreelancerCard = ({ freelancer }) => {
                                 title='Favorite'
                                 buttonStyle={{ borderColor: '#17202A', margin: 5 }}
                                 type="outline"
-                                onPress={() => addToFav( freelancer )}
+                                onPress={() => addToFav(freelancer)}
                             />
 
 

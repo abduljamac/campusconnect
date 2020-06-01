@@ -4,7 +4,7 @@ import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
 
-const ProfilePageReviews = ({ navigation }) => {
+const ProfilePageReviews = ({ navigation, data }) => {
 
     const { state, getAllReviews } = useContext(Review)
 
@@ -12,34 +12,38 @@ const ProfilePageReviews = ({ navigation }) => {
         getAllReviews()
     }, [navigation])
 
-    // console.log(state)
-    // console.log(freelancer)
+    console.log("state: ", state);
+    console.log("data: ", data);
 
     return (
-        <View>
-                {
-                    state !== undefined ? (
-                        <FlatList
-                            data={state}
-                            renderItem={({ item }) => {
-                                    return (
-                                        <ListItem
-                                            key={item.freelancerId}
-                                            leftAvatar={{ source: { uri: item.userImage } }}
-                                            title={item.userHandle}
-                                            rightTitle={item.createdAt.split("T")[0]}
-                                            subtitle={item.body}
-                                            titleStyle={styles.title}
-                                            subtitleStyle={styles.subtitle}
-                                            rightTitleStyle={styles.rightTitle}
-                                        />
-                                    )
-                            }}
-                            keyExtractor={(item) => item.createdAt}
-                            extraData={state}
-                        />
-                    ) : <Loading />
-                }
+        <View style={[styles.scene, { backgroundColor: '#673ab7' }]}>
+            {
+                state !== undefined ? (
+                    <FlatList
+                        data={state}
+                        renderItem={({ item }) => {
+                            if (item.userHandle == data.handle) {
+                                return (
+                                    <ListItem
+                                        key={item.freelancerId}
+                                        leftAvatar={{ source: { uri: item.userImage } }}
+                                        title={item.userHandle}
+                                        rightTitle={item.createdAt.split("T")[0]}
+                                        subtitle={item.body}
+                                        titleStyle={styles.title}
+                                        subtitleStyle={styles.subtitle}
+                                        rightTitleStyle={styles.rightTitle}
+                                    />
+                                )
+                            } else {
+                                return null
+                            }
+                        }}
+                        keyExtractor={(item) => item.createdAt}
+                        extraData={state}
+                    />
+                ) : <Loading />
+            }
         </View>
     )
 }

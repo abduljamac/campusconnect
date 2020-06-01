@@ -30,7 +30,6 @@ const ProfileScreen = ({ navigation }) => {
         { key: 'second', title: 'Gallary' },
     ])
 
-
     return (
         <ScrollView style={styles.scroll}>
 
