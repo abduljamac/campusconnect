@@ -12,7 +12,6 @@ const FreelancerPage = ({}) => {
 
     const { params } = useRoute()
     const { freelancer } = params
-
     const [index, setIndex] = useState(0)
 
     const [routes] = useState([

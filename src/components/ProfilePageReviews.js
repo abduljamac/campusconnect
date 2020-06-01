@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View, SafeAreaView, Button, FlatList } from 'react-native'
+import { StyleSheet, View,  FlatList } from 'react-native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'

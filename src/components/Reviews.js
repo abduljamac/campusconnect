@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View, SafeAreaView, Button, FlatList } from 'react-native'
+import { StyleSheet, SafeAreaView, Button, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
@@ -8,25 +8,20 @@ import Loading from './Loading'
 const Reviews = ({ navigation, freelancer }) => {
 
     const { navigate } = useNavigation()
-
     const { state, getAllReviews } = useContext(Review)
 
     useEffect(() => {
         getAllReviews()
     }, [navigation])
 
-
     return (
-        <SafeAreaView>
-            <View>
+        <SafeAreaView style={{flex: 1}}>
                 <Button
                     title='Leave a Review!'
                     buttonStyle={{ borderColor: '#17202A', marginRight: 5 }}
                     onPress={() => navigate('LeaveAReviewScreen', { freelancer: freelancer })}
                 />
-            </View>
-
-            <View>
+    
                 {
                     state !== undefined ? (
                         <FlatList
@@ -54,7 +49,7 @@ const Reviews = ({ navigation, freelancer }) => {
                         />
                     ) : <Loading />
                 }
-            </View>
+
         </SafeAreaView>
     )
 }

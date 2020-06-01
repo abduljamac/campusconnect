@@ -9,9 +9,7 @@ import Loading from '../components/Loading'
 const FreelancerFeedScreen = ({ navigation }) => {
 
     const { navigate } = useNavigation()
-
     const { state, fetchUsers } = useContext(Feed)
-
     const { params } = useRoute()
     const { categories } = params
 

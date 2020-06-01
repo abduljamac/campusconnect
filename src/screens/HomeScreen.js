@@ -1,16 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, TouchableHighlight, Image } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-import * as ImagePicker from 'expo-image-picker'
 
 const { width, height } = Dimensions.get('window')
 const SCREEN_WIDTH = width < height ? width : height
-
-const NumColums = 2
-
 const ITEM_HEIGHT = 145
 const ITEM_MARGIN = 20
-
+const NumColums = 2
 
 const HomeScreen = () => {
 
@@ -37,17 +33,6 @@ const HomeScreen = () => {
             </View>
         </TouchableHighlight>
     )
-
-    let openImagePickerAsync = async () => {
-        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync()
-    
-        if (permissionResult.granted === false) {
-          alert("Permission to access camera roll is required!")
-          return
-        }
-        
-        let pickerResult = await ImagePicker.launchImageLibraryAsync()
-      }
 
     return (
         <View style={{ alignContent: 'center', marginTop: 10, backgroundColor: 'white' }}>
