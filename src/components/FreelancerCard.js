@@ -7,24 +7,19 @@ import { AsyncStorage } from 'react-native'
 const { width } = Dimensions.get("window")
 
 const FreelancerCard = ({ freelancer }) => {
-    // console.log(freelancer)
-
     const favFreelanceArray = []
 
     const addToFav = (favFreelancers) => {
         AsyncStorage.getItem('favFreelancers', (err, result) => {
-            // const id = [1];
             const favFreelanceArray = []
             favFreelanceArray.push(favFreelancers)
             if (result !== null) {
-                console.log('Data Found', result);
-                var newIds = JSON.parse(result).concat(favFreelanceArray);
-                AsyncStorage.setItem('favFreelancers', JSON.stringify(newIds));
+                var newIds = JSON.parse(result).concat(favFreelanceArray)
+                AsyncStorage.setItem('favFreelancers', JSON.stringify(newIds))
             } else {
-                console.log('Data Not Found');
-                AsyncStorage.setItem('favFreelancers', JSON.stringify(favFreelanceArray));
+                AsyncStorage.setItem('favFreelancers', JSON.stringify(favFreelanceArray))
             }
-        });
+        })
     }
 
     return (
@@ -36,8 +31,6 @@ const FreelancerCard = ({ freelancer }) => {
                         <Text style={styles.title}>{freelancer.handle}</Text>
 
                         <View style={styles.details}>
-
-
                             <TouchableOpacity onPress={() => Clipboard.setString(`${freelancer.email}`)} style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Icon name="email" color="#17202A" size={18} />
                                 <Text style={styles.detailText} >{freelancer.email}</Text>
@@ -54,14 +47,9 @@ const FreelancerCard = ({ freelancer }) => {
                                 type="outline"
                                 onPress={() => addToFav(freelancer)}
                             />
-
-
                         </View>
-
                     </View>
-
-                    <Image style={styles.avatar} source={require("../../assets/no-img.jpg")} />
-
+                    <Image style={styles.avatar} source={{ uri: freelancer.profileImage }} />
                 </View>
 
                 <Text style={styles.text}> {freelancer.bio} </Text>

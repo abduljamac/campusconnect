@@ -12,9 +12,6 @@ const ProfilePageReviews = ({ navigation, data }) => {
         getAllReviews()
     }, [navigation])
 
-    console.log("state: ", state);
-    console.log("data: ", data);
-
     return (
         <View style={[styles.scene, { backgroundColor: '#673ab7' }]}>
             {

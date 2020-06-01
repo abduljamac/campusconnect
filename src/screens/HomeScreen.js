@@ -39,15 +39,14 @@ const HomeScreen = () => {
     )
 
     let openImagePickerAsync = async () => {
-        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync()
     
         if (permissionResult.granted === false) {
-          alert("Permission to access camera roll is required!");
-          return;
+          alert("Permission to access camera roll is required!")
+          return
         }
-    
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        console.log(pickerResult);
+        
+        let pickerResult = await ImagePicker.launchImageLibraryAsync()
       }
 
     return (

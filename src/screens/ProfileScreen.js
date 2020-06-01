@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     profile: {
-        // marginTop: 30,
         alignItems: "center"
     },
     avatar: {

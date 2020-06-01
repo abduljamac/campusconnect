@@ -144,7 +144,6 @@ const AppNavigator = () => {
                     await AsyncStorage.setItem('token', response.data.token)
                     dispatch({ type: 'SIGN_UP', payload: response.data.token })
                 } catch (error) {
-                    // console.log(error.message)
                     dispatch({ type: 'ADD_ERROR', payload: error.message })
                 }
             },
@@ -152,12 +151,9 @@ const AppNavigator = () => {
                 try {
                     setIsLoading(false)
                     const response = await CampusConnectApi.post('/login', { email, password })
-                    console.log(response.data)
                     await AsyncStorage.setItem('token', response.data.token)
                     dispatch({ type: 'SIGN_IN', payload: response.data.token })
                 } catch (error) {
-                    // console.log(error.message)
-                    // setErrorMessage('Please Check Email & Password')
                     dispatch({ type: 'ADD_ERROR', payload: error.message })
                 }
             },
@@ -190,7 +186,6 @@ const AppNavigator = () => {
         return <Loading />
     }
 
-    // console.log(state.token)
     return (
         <Review>
             <Feed>

@@ -15,8 +15,6 @@ const Reviews = ({ navigation, freelancer }) => {
         getAllReviews()
     }, [navigation])
 
-    // console.log(state)
-    // console.log(freelancer)
 
     return (
         <SafeAreaView>

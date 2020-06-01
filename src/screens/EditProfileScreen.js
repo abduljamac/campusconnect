@@ -17,29 +17,27 @@ const EditProfileScreen = () => {
 
 
     let openImagePickerAsync = async () => {
-        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync()
 
         if (permissionResult.granted === false) {
-            alert('Permission to access camera roll is required!');
-            return;
+            alert('Permission to access camera roll is required!')
+            return
         }
 
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        let pickerResult = await ImagePicker.launchImageLibraryAsync()
 
         if (pickerResult.cancelled === true) {
-            return;
+            return
         }
 
-        let localUri = pickerResult.uri;
-        let filename = localUri.split('/').pop();
+        let localUri = pickerResult.uri
+        let filename = localUri.split('/').pop()
 
-        let match = /\.(\w+)$/.exec(filename);
-        let type = match ? `image/${match[1]}` : `image`;
+        let match = /\.(\w+)$/.exec(filename)
+        let type = match ? `image/${match[1]}` : `image`
 
-
-        let formData = new FormData();
+        let formData = new FormData()
         formData.append('photo', { uri: localUri, name: filename, type })
-
 
         CampusConnectApi.post('/user/image', formData)
             .then(() => {
@@ -49,7 +47,6 @@ const EditProfileScreen = () => {
                 Alert.alert(error)
             })
     }
-
 
     return (
         <View style={styles.container}>
@@ -137,14 +134,12 @@ const styles = StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        // fontFamily: "Helvetica Neue",
         color: "#273746"
     },
     footerNav: {
         fontSize: 16,
         color: "#17202A",
         fontWeight: "500",
-        // fontFamily: "Helvetica Neue"
     }
 })
 

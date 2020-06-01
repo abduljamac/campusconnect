@@ -14,8 +14,7 @@ const LeaveAReviewScreen = () => {
     const [body, setBody] = useState('')
     const { sendReview } = useContext(Review)
 
-
-    let freelancerId;
+    let freelancerId
     if(freelancer !== undefined){
         freelancerId = freelancer.userId 
     } else {

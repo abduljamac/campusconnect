@@ -21,7 +21,7 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
     const validateEmail = (email) => {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+        return re.test(email)
     }
 
     const handleEmail = () => {
@@ -53,6 +53,11 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                 ...prevState,
                 confirmPasswordError: "Confirm Password is Required"
             }))
+        } else if(confirmPassword !== password){
+            setState(prevState => ({
+                ...prevState,
+                confirmPasswordError: "Please enter same password as above"
+            }))
         }
     }
 
@@ -73,8 +78,6 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
             }))
         }
     }
-
-
 
     return (
         <>
@@ -132,7 +135,7 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                                     />
                                 </Item>
                                 <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
-                                    {confirmPassword == '' ? state.confirmPasswordError : null}
+                                    {confirmPassword == '' || confirmPassword !== password ? state.confirmPasswordError : null}
                                 </Text>
                             </Spacer>
 
@@ -188,10 +191,6 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
 
             }
 
-
-
-
-
         </>
     )
 }
@@ -207,7 +206,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: "#273746",
         fontWeight: "600",
-        // fontFamily: "Helvetica Neue"
     }
 })
 

@@ -7,30 +7,17 @@ import { ListItem } from 'react-native-elements'
 const FavoritesScreen = ({ navigation }) => {
 
     const { navigate } = useNavigation()
-
-    // AsyncStorage.getAllKeys()
-    //     .then((keys) => AsyncStorage.multiGet(keys)
-    //         .then((data) => console.log(data)))
-
     const [favs, setFav] = React.useState([])
-
-    // AsyncStorage.removeItem('favFreelancers')
 
     useEffect(() => {
         const favFreelancersArray = navigation.addListener('focus', () => {
             AsyncStorage.getItem('favFreelancers', (err, result) => {
-                // console.log("**", result);
                 setFav(JSON.parse(result))
             })
         })
         return favFreelancersArray
     }, [navigation])
 
-    console.log("favs :", favs);
-
-    const displayData = () => {
-
-    }
     return (
         <View>
             <View>

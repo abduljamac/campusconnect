@@ -45,14 +45,12 @@ const styles = StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        // fontFamily: "Helvetica Neue",
         color: "#273746"
     },
     footerNav: {
         fontSize: 16,
         color: "#17202A",
         fontWeight: "500",
-        // fontFamily: "Helvetica Neue"
     }
 })
 
