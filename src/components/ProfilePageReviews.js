@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View,  FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, Alert } from 'react-native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
+import CampusConnectApi from '../api/CampusConnectApi'
 
 const ProfilePageReviews = ({ navigation, data }) => {
 
@@ -12,8 +13,18 @@ const ProfilePageReviews = ({ navigation, data }) => {
         getAllReviews()
     }, [navigation])
 
+
+    const deleteReview = (reviewId) => {
+        CampusConnectApi.delete(`/reviews/${reviewId}`)
+            .then(() => {
+                Alert.alert("Review succesfully deleted")
+            })
+            .catch(err => {
+                Alert.alert(error)
+            })
+    }
     return (
-        <View style={[styles.scene, { backgroundColor: '#673ab7' }]}>
+        <View style={[styles.scene]}>
             {
                 state !== undefined ? (
                     <FlatList
@@ -30,6 +41,7 @@ const ProfilePageReviews = ({ navigation, data }) => {
                                         titleStyle={styles.title}
                                         subtitleStyle={styles.subtitle}
                                         rightTitleStyle={styles.rightTitle}
+                                        onLongPress={() => deleteReview(item.reviewId) }
                                     />
                                 )
                             } else {
