@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, FlatList, Alert, Text } from 'react-native'
-import { Context as Review } from '../context/Review'
+import { Context as UserReviews } from '../context/UserReviews'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
 import CampusConnectApi from '../api/CampusConnectApi'
@@ -8,7 +8,7 @@ import CampusConnectApi from '../api/CampusConnectApi'
 
 const ProfilePageReviews = ({ navigation, data }) => {
 
-    const { state, getAllUserReviews } = useContext(Review)
+    const { state, getAllUserReviews } = useContext(UserReviews)
 
     useEffect(() => {
         getAllUserReviews()

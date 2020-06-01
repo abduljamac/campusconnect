@@ -25,6 +25,7 @@ import { AuthContext } from '../src/context/AuthContext'
 import { Provider as ProfilePage } from '../src/context/ProfilePage'
 import { Provider as Feed } from '../src/context/Feed'
 import { Provider as Review } from '../src/context/Review'
+import { Provider as UserReviews } from '../src/context/UserReviews'
 
 const AuthStack = createStackNavigator()
 const HomeStack = createStackNavigator()
@@ -187,23 +188,25 @@ const AppNavigator = () => {
     }
 
     return (
-        <Review>
-            <Feed>
-                <ProfilePage>
-                    <AuthContext.Provider value={authContext}>
-                        <NavigationContainer>
-                            {
-                                state.token === null ? (
-                                    <AuthStackScreen />
-                                ) : (
-                                        <DrawerScreen />
-                                    )
-                            }
-                        </NavigationContainer>
-                    </AuthContext.Provider>
-                </ProfilePage>
-            </Feed>
-        </Review>
+        <UserReviews>
+            <Review>
+                <Feed>
+                    <ProfilePage>
+                        <AuthContext.Provider value={authContext}>
+                            <NavigationContainer>
+                                {
+                                    state.token === null ? (
+                                        <AuthStackScreen />
+                                    ) : (
+                                            <DrawerScreen />
+                                        )
+                                }
+                            </NavigationContainer>
+                        </AuthContext.Provider>
+                    </ProfilePage>
+                </Feed>
+            </Review>
+        </UserReviews>
     )
 }
 

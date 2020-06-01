@@ -1,7 +1,7 @@
 import createDataContext from './ContextCreator'
 import CampusConnectApi from '../api/CampusConnectApi'
 
-const reviewReducer = (state, action) => {
+const userReviewReducer = (state, action) => {
     switch (action.type) {
         case 'FETCH_ALL_REVIEWS':
             return action.payload
@@ -10,18 +10,13 @@ const reviewReducer = (state, action) => {
     }
 }
 
-const getAllReviews = dispatch => async () => {
-    const response = await CampusConnectApi.get('/reviews')
+const getAllUserReviews = dispatch => async () => {
+    const response = await CampusConnectApi.get('/reviews/users')
     dispatch({ type: 'FETCH_ALL_REVIEWS', payload: response.data })
 }
 
-
-const sendReview = dispatch => async ({ body, freelancerId }) => {
-    await CampusConnectApi.post(`/review/${freelancerId}`, { body })
-}
-
 export const { Provider, Context } = createDataContext(
-    reviewReducer,
-    { getAllReviews, sendReview },
+    userReviewReducer,
+    { getAllUserReviews },
     {}
 )
