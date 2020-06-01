@@ -11,6 +11,71 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
     const [handle, setHandle] = useState('')
     const [uni, setUni] = useState('')
 
+    const [state, setState] = useState({
+        emailError: '',
+        passwordError: '',
+        confirmPasswordError: '',
+        handleError: '',
+        uniError: ''
+    })
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    const handleEmail = () => {
+        if (email == "" || !validateEmail(email)) {
+            setState(prevState => ({
+                ...prevState,
+                emailError: "Please enter a valid email"
+            }))
+        } else {
+            setState(prevState => ({
+                ...prevState,
+                emailError: ""
+            }))
+        }
+    }
+
+    const handlePasswordError = () => {
+        if (password == "") {
+            setState(prevState => ({
+                ...prevState,
+                passwordError: "Password Required"
+            }))
+        }
+    }
+
+    const handleConfirmPasswordError = () => {
+        if (confirmPassword == "") {
+            setState(prevState => ({
+                ...prevState,
+                confirmPasswordError: "Confirm Password is Required"
+            }))
+        }
+    }
+
+    const handleNameError = () => {
+        if (handle == "") {
+            setState(prevState => ({
+                ...prevState,
+                handleError: "Full Name is Required"
+            }))
+        }
+    }
+
+    const handleUniError = () => {
+        if (uni == "") {
+            setState(prevState => ({
+                ...prevState,
+                uniError: "Univeristy is Required"
+            }))
+        }
+    }
+
+
+
     return (
         <>
             <Form>
@@ -26,8 +91,12 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                             onChangeText={newText => setEmail(newText)}
                             autoCapitalize="none"
                             autoCorrect={false}
+                            onBlur={() => handleEmail()}
                         />
                     </Item>
+                    <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
+                        {state.emailError}
+                    </Text>
                 </Spacer>
 
                 <Spacer>
@@ -39,8 +108,12 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                             onChangeText={newText => setPassword(newText)}
                             autoCapitalize="none"
                             autoCorrect={false}
+                            onBlur={() => handlePasswordError()}
                         />
                     </Item>
+                    <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
+                        {password == '' ? state.passwordError : null}
+                    </Text>
                 </Spacer>
 
                 {
@@ -55,8 +128,12 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                                         onChangeText={newText => setConfirmPassword(newText)}
                                         autoCapitalize="none"
                                         autoCorrect={false}
+                                        onBlur={() => handleConfirmPasswordError()}
                                     />
                                 </Item>
+                                <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
+                                    {confirmPassword == '' ? state.confirmPasswordError : null}
+                                </Text>
                             </Spacer>
 
                             <Spacer>
@@ -67,8 +144,12 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                                         onChangeText={newText => setHandle(newText)}
                                         autoCapitalize="none"
                                         autoCorrect={false}
+                                        onBlur={() => handleNameError()}
                                     />
                                 </Item>
+                                <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
+                                    {handle == '' ? state.handleError : null}
+                                </Text>
                             </Spacer>
 
                             <Spacer>
@@ -79,14 +160,18 @@ const AuthForm = ({ headerText, errorMessage, submitButtonText, onSubmit }) => {
                                         onChangeText={newText => setUni(newText)}
                                         autoCapitalize="none"
                                         autoCorrect={false}
+                                        onBlur={() => handleUniError()}
                                     />
                                 </Item>
+                                <Text style={{ color: 'red', marginLeft: 15, fontSize: 12 }}>
+                                    {uni == '' ? state.uniError : null}
+                                </Text>
                             </Spacer>
                         </>
 
                     ) : null
                 }
-      
+
             </Form>
 
             {
