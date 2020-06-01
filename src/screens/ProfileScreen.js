@@ -6,7 +6,6 @@ import { Context as ProfilePage } from '../context/ProfilePage'
 import Loading from '../components/Loading'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import ProfilePageReviews from '../components/ProfilePageReviews'
-import Gallary from '../components/Gallary'
 
 const initialLayout = { width: Dimensions.get('window').width }
 
@@ -26,8 +25,7 @@ const ProfileScreen = ({ navigation }) => {
     const [index, setIndex] = useState(0)
 
     const [routes] = useState([
-        { key: 'first', title: 'Reviews' },
-        { key: 'second', title: 'Gallary' },
+        { key: 'first', title: 'Reviews' }
     ])
 
     return (
@@ -75,8 +73,7 @@ const ProfileScreen = ({ navigation }) => {
                             <TabView
                                 navigationState={{ index, routes }}
                                 renderScene={SceneMap({
-                                    first: () => <ProfilePageReviews data={state.user} />,
-                                    second: Gallary,
+                                    first: () => <ProfilePageReviews data={state.user} />
                                 })}
                                 onIndexChange={setIndex}
                                 initialLayout={initialLayout}

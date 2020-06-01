@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View, FlatList, Alert } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { StyleSheet, View, FlatList, Alert, Text } from 'react-native'
 import { Context as Review } from '../context/Review'
 import { ListItem } from 'react-native-elements'
 import Loading from './Loading'
 import CampusConnectApi from '../api/CampusConnectApi'
+
 
 const ProfilePageReviews = ({ navigation, data }) => {
 
@@ -18,17 +19,20 @@ const ProfilePageReviews = ({ navigation, data }) => {
         CampusConnectApi.delete(`/reviews/${reviewId}`)
             .then(() => {
                 Alert.alert("Review succesfully deleted")
+                getAllReviews()
             })
             .catch(err => {
                 Alert.alert(error)
             })
     }
+
     return (
         <View style={[styles.scene]}>
             {
                 state !== undefined ? (
                     <FlatList
                         data={state}
+                        extraData={state}
                         renderItem={({ item }) => {
                             if (item.userHandle == data.handle) {
                                 return (
@@ -41,7 +45,7 @@ const ProfilePageReviews = ({ navigation, data }) => {
                                         titleStyle={styles.title}
                                         subtitleStyle={styles.subtitle}
                                         rightTitleStyle={styles.rightTitle}
-                                        onLongPress={() => deleteReview(item.reviewId) }
+                                        onLongPress={() => deleteReview(item.reviewId)}
                                     />
                                 )
                             } else {
@@ -49,7 +53,6 @@ const ProfilePageReviews = ({ navigation, data }) => {
                             }
                         }}
                         keyExtractor={(item) => item.createdAt}
-                        extraData={state}
                     />
                 ) : <Loading />
             }
