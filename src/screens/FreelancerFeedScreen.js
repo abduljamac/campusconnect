@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
-import { ListItem } from 'react-native-elements'
+import { StyleSheet, View, FlatList, Text} from 'react-native'
+import { ListItem , Button} from 'react-native-elements'
 import { Context as Feed } from '../context/Feed'
 import { useRoute } from '@react-navigation/native'
-import {useNavigation} from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import Loading from '../components/Loading'
 
 const FreelancerFeedScreen = ({ navigation }) => {
@@ -37,10 +37,15 @@ const FreelancerFeedScreen = ({ navigation }) => {
                                         leftAvatar={{ source: { uri: item.profileImage } }}
                                         title={item.handle}
                                         rightTitle={item.price}
-                                        subtitle={item.bio}
+                                        // subtitle={item.bio}
+                                        subtitle={
+                                            <View style={styles.subtitleView}>
+                                                <Text style={styles.subtitle}>{item.bio}</Text>
+                                                <Text style={{ borderColor: '#17202A', marginRight: 3 }}> {item.category} </Text>
+                                            </View>
+                                        }
                                         titleStyle={styles.title}
-                                        subtitleStyle={styles.subtitle}
-                                        onPress={ () => navigate('FreelancerPage' , { freelancer: item  } ) }
+                                        onPress={() => navigate('FreelancerPage', { freelancer: item })}
                                     />
                                 )
                             } else {
