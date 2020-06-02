@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext , useEffect} from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, TouchableHighlight, Image } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+import { Context as ProfilePage } from '../context/ProfilePage'
 
 const { width, height } = Dimensions.get('window')
 const SCREEN_WIDTH = width < height ? width : height
@@ -8,7 +9,7 @@ const ITEM_HEIGHT = 145
 const ITEM_MARGIN = 20
 const NumColums = 2
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
 
     const { navigate } = useNavigation()
 
@@ -22,7 +23,7 @@ const HomeScreen = () => {
     ]
 
     onPressCategory = item => {
-        navigate('FreelancerFeedScreen', { categories: item })
+        navigate('FreelancerFeedScreen', { categories: item, userUni: state.user.uni })
     }
 
     renderCategories = ({ item }) => (
@@ -33,6 +34,15 @@ const HomeScreen = () => {
             </View>
         </TouchableHighlight>
     )
+
+    const { state, fetchUserDetails } = useContext(ProfilePage)
+
+    useEffect(() => {
+        const userDetails = navigation.addListener('focus', () => {
+            fetchUserDetails()
+        })
+        return userDetails
+    }, [navigation])
 
     return (
         <View style={{ alignContent: 'center', marginTop: 10, backgroundColor: 'white' }}>

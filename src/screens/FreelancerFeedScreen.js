@@ -11,7 +11,7 @@ const FreelancerFeedScreen = ({ navigation }) => {
     const { navigate } = useNavigation()
     const { state, fetchUsers } = useContext(Feed)
     const { params } = useRoute()
-    const { categories } = params
+    const { categories, userUni } = params
 
     useEffect(() => {
         const users = navigation.addListener('focus', () => {
@@ -19,6 +19,8 @@ const FreelancerFeedScreen = ({ navigation }) => {
         })
         return users
     }, [navigation])
+
+    console.log(state)
 
     return (
         <View>
@@ -28,7 +30,7 @@ const FreelancerFeedScreen = ({ navigation }) => {
                         data={state}
                         keyExtractor={(item) => item.userId}
                         renderItem={({ item }) => {
-                            if (item.category == categories.category) {
+                            if (item.category === categories.category && item.uni === userUni) {
                                 return (
                                     <ListItem
                                         key={item.userId}

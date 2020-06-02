@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, ScrollView, Dimensions, View , SafeAreaView } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import FreelancerCard from '../components/FreelancerCard'

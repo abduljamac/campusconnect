@@ -44,7 +44,7 @@ const AuthStackScreen = () => (
 
 const HomeStackSreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
+        <HomeStack.Screen name="Home" component={Home} options={{ title: 'Category Page', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
         <HomeStack.Screen name="FreelancerFeedScreen" component={FreelancerFeedScreen} options={{ title: 'Freelancer Feed', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
         <HomeStack.Screen name="FreelancerPage" component={FreelancerPage} options={{ title: 'Freelancer Page', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
         <HomeStack.Screen name="LeaveAReviewScreen" component={LeaveAReviewScreen} options={{ title: 'Leave A Review', headerStyle: { backgroundColor: '#eb567c' }, headerTintColor: '#fff' }} />
